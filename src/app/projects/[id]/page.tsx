@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, GitHub, Calendar, Users, Lightbulb, TrendingUp } from "lucide-react";
+import { ArrowLeft, ExternalLink, Code, Calendar, Users, Lightbulb, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const project = projects.find((p) => p.id === params.id);
-  
+
   if (!project) {
     return {
       title: "Project Not Found",
@@ -75,7 +75,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
                 target="_blank"
                 className="glass-card px-6 py-3 rounded-full text-on-background font-label-caps text-sm hover:scale-105 transition-transform"
               >
-                <GitHub size={16} className="mr-2" />
+                <Code size={16} className="mr-2" />
                 View Code
               </Link>
             </div>

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 
   return {
-    title: `${project.title} - Shishir Karmokar`,
+    title: `${project.title} - MD MAHFUZUL HAQUE`,
     description: project.description,
   };
 }

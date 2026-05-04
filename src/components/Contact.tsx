@@ -4,10 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, Globe, Send, ArrowRight, Phone, CheckCircle2, AlertCircle } from "lucide-react";
+import Toast from "./Toast";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formMessage, setFormMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<"success" | "error" | "info">("success");
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -74,6 +78,7 @@ export default function Contact() {
               <p className="text-muted text-sm mb-4">mdmahfuzulhaque3140@gmail.com</p>
               <a
                 href="mailto:mdmahfuzulhaque3140@gmail.com"
+                target="_blank"
                 className="text-blue-400 flex items-center gap-2 font-label-caps text-xs group-hover:gap-4 transition-all"
               >
                 Write me <ArrowRight size={14} />
@@ -137,13 +142,22 @@ export default function Contact() {
                       if (data.success) {
                         setStatus("success");
                         (e.target as HTMLFormElement).reset();
+                        setToastMessage("✅ Message sent successfully! I'll get back to you soon.");
+                        setToastType("success");
+                        setShowToast(true);
                       } else {
                         setStatus("error");
                         setFormMessage(data.message || "Something went wrong.");
+                        setToastMessage("❌ Failed to send message. Please try again.");
+                        setToastType("error");
+                        setShowToast(true);
                       }
                     } catch (err) {
                       setStatus("error");
                       setFormMessage("Failed to send message. Please try again.");
+                      setToastMessage("❌ Network error. Please check your connection and try again.");
+                      setToastType("error");
+                      setShowToast(true);
                     }
                   }}
                   className="space-y-6"
@@ -231,6 +245,14 @@ export default function Contact() {
           </div>
         </div>
       </div>
+
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </section>
   );
 }

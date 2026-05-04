@@ -1,3 +1,4 @@
+// BACKUP OF ORIGINAL LAYOUT - KEEP THIS FILE
 import type { Metadata } from "next";
 import { Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
@@ -19,6 +20,22 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 export const metadata: Metadata = {
   title: "MD MAHFUZUL HAQUE | Web Developer",
   description: "A passionate Web Developer specializing in building exceptional digital experiences with modern web technologies. Diploma in Computer Science Technology student at Mymensingh Polytechnic Institute.",
+  keywords: ["Web Developer", "Frontend Developer", "React", "Next.js", "JavaScript", "TypeScript", "MD MAHFUZUL HAQUE", "Portfolio", "Computer Science"],
+  authors: [{ name: "MD MAHFUZUL HAQUE" }],
+  creator: "MD MAHFUZUL HAQUE",
+  openGraph: {
+    title: "MD MAHFUZUL HAQUE | Web Developer",
+    description: "A passionate Web Developer specializing in building exceptional digital experiences with modern web technologies.",
+    url: "https://your-portfolio-url.com",
+    siteName: "MD MAHFUZUL HAQUE Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MD MAHFUZUL HAQUE | Web Developer",
+    description: "A passionate Web Developer specializing in building exceptional digital experiences with modern web technologies.",
+  },
 };
 
 export default function RootLayout({
@@ -33,7 +50,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
-        <link rel="shortcut icon" href="/images/my-photo.jpg" type="image/x-icon" />
+        <link rel="shortcut icon" href="/logo.png" type="image/x-icon" />
       </head>
       <body className={`${spaceGrotesk.variable} ${manrope.variable} font-body-md bg-background text-on-background antialiased transition-colors duration-300`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

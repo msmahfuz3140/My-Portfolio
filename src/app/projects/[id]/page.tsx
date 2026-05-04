@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github, Calendar, Users, Lightbulb, TrendingUp } from "lucide-react";
+import { ArrowLeft, ExternalLink, GitHub, Calendar, Users, Lightbulb, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -75,7 +75,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
                 target="_blank"
                 className="glass-card px-6 py-3 rounded-full text-on-background font-label-caps text-sm hover:scale-105 transition-transform"
               >
-                <Github size={16} className="mr-2" />
+                <GitHub size={16} className="mr-2" />
                 View Code
               </Link>
             </div>

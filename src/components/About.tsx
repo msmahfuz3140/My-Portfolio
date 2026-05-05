@@ -39,21 +39,27 @@ export default function About() {
           <h2 className="font-h2 text-4xl md:text-h2 text-on-background font-bold">About Me</h2>
           <div className="space-y-6 text-muted font-body-lg">
             <p>
-              I am a <span className="text-primary font-bold">MERN Stack Developer</span> with a strong interest in building scalable,
-              high-performance web applications enhanced with AI-driven capabilities. Currently pursuing a degree in
-              <span className="text-secondary font-medium">Computer Science and Engineering</span>, I have developed a solid foundation in modern web
-              technologies and software development principles.
+              I am <span className="text-primary font-bold">MD MAHFUZUL HAQUE</span>, a passionate <span className="text-primary font-bold">Web Developer</span> currently pursuing
+              <span className="text-secondary font-medium">Diploma in Computer Science Technology (CST)</span> at
+              <span className="text-secondary font-medium">Mymensingh Polytechnic Institute</span>. I have developed a strong foundation in
+              modern web technologies and software development principles.
             </p>
             <p>
               My experience includes developing full-stack applications using MongoDB, Express.js, React, and Node.js,
-              with a focus on writing clean, maintainable code and designing intuitive user interfaces. I am particularly
-              interested in <span className="text-secondary font-medium">integrating artificial intelligence</span> into web applications to create smarter,
-              more efficient, and user-centric solutions.
+              with a focus on writing clean, maintainable code and designing intuitive user interfaces.
+              I have specialized training in <span className="text-cyan-400 font-medium">web development</span> and
+              <span className="text-cyan-400 font-medium">cybersecurity</span>, ensuring I build secure and efficient applications.
             </p>
             <p>
-              I am continuously expanding my skill set by exploring advanced topics such as authentication systems,
-              API architecture, and distributed systems. I approach development with a problem-solving mindset and a
-              commitment to delivering reliable and impactful digital products.
+              I am continuously expanding my skill set by exploring advanced topics such as
+              <span className="text-cyan-400 font-medium">cybersecurity</span>, authentication systems, API architecture, and distributed systems.
+              My focus on <span className="text-cyan-400 font-medium">cybersecurity</span> ensures I build secure, protected applications
+              that safeguard user data and maintain system integrity.
+            </p>
+            <p>
+              Based in <span className="text-primary font-medium">Mymensingh</span>, I approach development with a problem-solving mindset and a
+              commitment to delivering reliable and impactful digital products that combine robust security measures
+              to create innovative, safe, and efficient solutions.
             </p>
           </div>
         </div>

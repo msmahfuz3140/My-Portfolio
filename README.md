@@ -1,6 +1,6 @@
 # MD MAHFUZUL HAQUE - Portfolio Website
 
-A modern, responsive portfolio website built with Next.js 16, TypeScript, and Tailwind CSS. This portfolio showcases my skills, projects, and professional experience as a Web Developer and Computer Science Technology student.
+A modern, responsive portfolio website built with Next.js 16, TypeScript, and Tailwind CSS. This portfolio showcases my skills, projects, and professional experience as a Web Developer and Computer Science Technology student at Mymensingh Polytechnic Institute.
 
 ## 🌟 Features
 
@@ -48,23 +48,33 @@ my-portfolio/
 │   │   ├── globals.css          # Global styles and animations
 │   │   ├── layout.tsx           # Root layout with providers
 │   │   ├── page.tsx             # Homepage
+│   │   ├── not-found.tsx        # 404 error page
 │   │   └── projects/[id]/       # Dynamic project pages
 │   ├── components/
 │   │   ├── Navbar.tsx           # Navigation with theme toggle
 │   │   ├── Hero.tsx             # Hero section with animations
 │   │   ├── About.tsx            # About section
 │   │   ├── Skills.tsx           # Skills with marquee animation
-│   │   ├── Projects.tsx         # Projects showcase
+│   │   ├── Technologies.tsx      # Technologies marquee section
+│   │   ├── Projects.tsx         # Projects showcase with buttons
 │   │   ├── Qualifications.tsx   # Education & experience
-│   │   ├── Contact.tsx          # Contact form and info
+│   │   ├── Contact.tsx          # Contact form with toast
 │   │   ├── Footer.tsx           # Footer with social links
 │   │   ├── ThemeProvider.tsx    # Theme context provider
 │   │   ├── SmoothScroll.tsx     # Smooth scrolling wrapper
-│   │   └── CustomCursor.tsx     # Custom cursor component
+│   │   ├── CustomCursor.tsx     # Custom cursor component
+│   │   └── Toast.tsx          # Toast notifications
 │   └── data/
 │       └── projects.ts          # Projects data
 ├── public/
 │   ├── images/                  # Image assets
+│   │   ├── my-photo.jpg      # Profile picture
+│   │   ├── keen-keeper.png   # KeenKeeper project
+│   │   ├── DigiTools.png     # Digi Tools project
+│   │   ├── Book-vibe.png     # Bookvibe project
+│   │   ├── quebani-hut.png  # Qurbani Hut project
+│   │   ├── dragon-news.png    # Dragon News project
+│   │   └── bpl-dream-11.png # BPL Dream 11 project
 │   └── resume.pdf              # Downloadable resume
 └── README.md
 ```
@@ -168,6 +178,56 @@ npm run start
 - **GitHub**: [msmahfuz3140](https://github.com/msmahfuz3140)
 - **Instagram**: [msmahfuz3140](https://www.instagram.com/msmahfuz3140)
 - **Facebook**: [msmahfuz3140](https://www.facebook.com/msmahfuz3140)
+
+## 🚀 Featured Projects
+
+### 1. KeenKeeper
+
+- **Type**: Social Management Platform
+- **Description**: Comprehensive friend hub and relationship management platform with friend tracking, activity logging, and reminders
+- **Tech Stack**: React.js, Node.js, MongoDB, Express.js, GSAP
+- **Live Demo**: [https://keen-keeper-wine.vercel.app/](https://keen-keeper-wine.vercel.app/)
+- **GitHub**: [https://github.com/msmahfuz3140/Keen_Keeper](https://github.com/msmahfuz3140/Keen_Keeper)
+
+### 2. Digi Tools
+
+- **Type**: Digital Marketplace
+- **Description**: One-stop-shop for digital creators with AI tool subscriptions and premium stock assets
+- **Tech Stack**: Next.js, Stripe, MongoDB, Tailwind CSS, Framer Motion
+- **Live Demo**: [https://digitools-by-sk.netlify.app/](https://digitools-by-sk.netlify.app/)
+- **GitHub**: [https://github.com/shuvr0shishir/DigiTools](https://github.com/shuvr0shishir/DigiTools)
+
+### 3. Bookvibe
+
+- **Type**: Social Platform for Book Lovers
+- **Description**: Community-driven platform for bibliophiles with reading progress tracking and book reviews
+- **Tech Stack**: React.js, Firebase, Context API, Tailwind CSS
+- **Live Demo**: [https://real-book-vibe.netlify.app/](https://real-book-vibe.netlify.app/)
+- **GitHub**: [https://github.com/msmahfuz3140/Book-Vibe-Project](https://github.com/msmahfuz3140/Book-Vibe-Project)
+
+### 4. Qurbani Hut
+
+- **Type**: Online Marketplace
+- **Description**: Modern marketplace for buying and selling Qurbani animals connecting farmers directly with buyers
+- **Tech Stack**: Next.js, React.js, Tailwind CSS, Node.js, MongoDB, REST API
+- **Live Demo**: [https://qurbani-hut-mocha.vercel.app/](https://qurbani-hut-mocha.vercel.app/)
+- **GitHub**: [https://github.com/msmahfuz3140/QurbaniHat-Project](https://github.com/msmahfuz3140/QurbaniHat-Project)
+
+### 5. Dragon News
+
+- **Type**: News Portal
+- **Description**: Modern news portal with category-based browsing and detailed articles
+- **Tech Stack**: Next.js, React.js, Tailwind CSS, Firebase Authentication, REST API
+- **Live Demo**: [https://dragon-news-ms.vercel.app/](https://dragon-news-ms.vercel.app/)
+- **GitHub**: [https://github.com/msmahfuz3140/Dragon-news](https://github.com/msmahfuz3140/Dragon-news)
+
+### 6. BPL Dream 11
+
+- **Type**: Fantasy Cricket Game
+- **Description**: Fantasy cricket team builder for Bangladesh Premier League with player selection and team management
+- **Tech Stack**: React.js, JavaScript (ES6), Tailwind CSS, Context API, REST API
+- **Live Demo**: [https://bpl-dream-11-webp.netlify.app/](https://bpl-dream-11-webp.netlify.app/)
+- **GitHub**: [https://github.com/msmahfuz3140/BPL-Dream-11](https://github.com/msmahfuz3140/BPL-Dream-11)
 
 ## 🎓 Education
 

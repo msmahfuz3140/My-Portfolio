@@ -6,18 +6,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Database, Code2, Terminal, Cloud, Laptop, Network, CheckCircle2 } from "lucide-react";
 
 const skills = [
-  { name: "Next.js", icon: <img src="https://skillicons.dev/icons?i=nextjs" className="w-10 h-10" alt="Next.js" /> },
-  { name: "React", icon: <img src="https://skillicons.dev/icons?i=react" className="w-10 h-10" alt="React" /> },
-  { name: "JavaScript", icon: <img src="https://skillicons.dev/icons?i=js" className="w-10 h-10" alt="JavaScript" /> },
-  { name: "MongoDB", icon: <img src="https://skillicons.dev/icons?i=mongodb" className="w-10 h-10" alt="MongoDB" /> },
-  { name: "Express", icon: <img src="https://skillicons.dev/icons?i=express" className="w-10 h-10" alt="Express" /> },
-  { name: "Git", icon: <img src="https://skillicons.dev/icons?i=git" className="w-10 h-10" alt="Git" /> },
-  { name: "TailwindCSS", icon: <img src="https://skillicons.dev/icons?i=tailwind" className="w-10 h-10" alt="TailwindCSS" /> },
-  { name: "HTML5", icon: <img src="https://skillicons.dev/icons?i=html" className="w-10 h-10" alt="HTML5" /> },
-  { name: "CSS", icon: <img src="https://skillicons.dev/icons?i=css" className="w-10 h-10" alt="CSS" /> },
-  { name: "C", icon: <img src="https://skillicons.dev/icons?i=c" className="w-10 h-10" alt="C" /> },
-  { name: "C++", icon: <img src="https://skillicons.dev/icons?i=cpp" className="w-10 h-10" alt="C++" /> },
-  { name: "Python", icon: <img src="https://skillicons.dev/icons?i=py" className="w-10 h-10" alt="Python" /> },
+  { name: "HTML", icon: <img src="https://skillicons.dev/icons?i=html" className="w-10 h-10" alt="HTML5" suppressHydrationWarning />, level: 90 },
+  { name: "CSS", icon: <img src="https://skillicons.dev/icons?i=css" className="w-10 h-10" alt="CSS" suppressHydrationWarning />, level: 95 },
+  { name: "JavaScript", icon: <img src="https://skillicons.dev/icons?i=js" className="w-10 h-10" alt="JavaScript" suppressHydrationWarning />, level: 85 },
+  { name: "React", icon: <img src="https://skillicons.dev/icons?i=react" className="w-10 h-10" alt="React" suppressHydrationWarning />, level: 88 },
+  { name: "Next.js", icon: <img src="https://skillicons.dev/icons?i=nextjs" className="w-10 h-10" alt="Next.js" suppressHydrationWarning />, level: 75 },
+  { name: "Node.js", icon: <img src="https://skillicons.dev/icons?i=nodejs" className="w-10 h-10" alt="Node.js" suppressHydrationWarning />, level: 82 },
+  { name: "Express", icon: <img src="https://skillicons.dev/icons?i=express" className="w-10 h-10" alt="Express" suppressHydrationWarning />, level: 78 },
+  { name: "MongoDB", icon: <img src="https://skillicons.dev/icons?i=mongodb" className="w-10 h-10" alt="MongoDB" suppressHydrationWarning />, level: 76 },
+  { name: "TailwindCSS", icon: <img src="https://skillicons.dev/icons?i=tailwind" className="w-10 h-10" alt="TailwindCSS" suppressHydrationWarning />, level: 92 },
+  { name: "Git", icon: <img src="https://skillicons.dev/icons?i=git" className="w-10 h-10" alt="Git" suppressHydrationWarning />, level: 85 },
+  { name: "Python", icon: <img src="https://skillicons.dev/icons?i=py" className="w-10 h-10" alt="Python" suppressHydrationWarning />, level: 70 },
 ];
 
 export default function Skills() {
@@ -83,76 +82,66 @@ export default function Skills() {
       </div>
 
       <div className="max-w-6xl mx-auto">
-        {/* Professional Marquee Container */}
-        <div className="marquee-container mb-24">
-          <div className="marquee-content gap-6 sm:gap-8">
-            {/* First set of skills */}
-            {skills.map((skill, index) => (
-              <div key={`first-${index}`} className="skill-item group relative shrink-0">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 glass-card rounded-full flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-110">
+        {/* Skills Grid with Progress Bars */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-24">
+          {skills.map((skill, index) => (
+            <div key={index} className="skill-item glass-card p-6 rounded-2xl group hover:border-primary/50 transition-all duration-300">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-background/50 group-hover:bg-background/80 transition-colors">
                   {skill.icon}
                 </div>
-                <span className="absolute -bottom-6 sm:-bottom-8 left-1/2 -translate-x-1/2 font-label-caps text-[8px] sm:text-[10px] text-muted opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap bg-background/80 px-2 py-1 rounded">
-                  {skill.name}
-                </span>
-              </div>
-            ))}
-            {/* Duplicate set for seamless loop */}
-            {skills.map((skill, index) => (
-              <div key={`second-${index}`} className="skill-item group relative shrink-0">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 glass-card rounded-full flex items-center justify-center transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-110">
-                  {skill.icon}
+                <div className="flex-1">
+                  <h3 className="font-h3 text-[18px] text-on-background font-semibold">{skill.name}</h3>
                 </div>
-                <span className="absolute -bottom-6 sm:-bottom-8 left-1/2 -translate-x-1/2 font-label-caps text-[8px] sm:text-[10px] text-muted opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap bg-background/80 px-2 py-1 rounded">
-                  {skill.name}
-                </span>
               </div>
-            ))}
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="skill-card glass-card p-10 rounded-3xl">
-            <h3 className="font-h3 text-2xl md:text-h3 text-on-background mb-6 flex items-center gap-4">
-              {mounted && <Laptop className="text-blue-400" />}
-              Frontend Developer
-            </h3>
-            <ul className="space-y-4 text-muted font-body-md">
-              {[
-                "Modern UI with React & Next.js",
-                "Responsive & Fluid Layouts",
-                "Performance Optimization",
-                "Interactive Animations",
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  {mounted && <CheckCircle2 className="text-green-400" size={18} />}
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="skill-card glass-card p-10 rounded-3xl">
-            <h3 className="font-h3 text-2xl md:text-h3 text-on-background mb-6 flex items-center gap-4">
-              {mounted && <Database className="text-blue-400" />}
-              Backend Developer
-            </h3>
-            <ul className="space-y-4 text-muted font-body-md">
-              {[
-                "Scalable Node.js Architecture",
-                "REST & GraphQL API Design",
-                "Database Schema Modeling",
-                "Authentication & Security",
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  {mounted && <CheckCircle2 className="text-green-400" size={18} />}
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+              {/* Skill Level Bar */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-label-caps text-muted uppercase">Proficiency</span>
+                  <span className="text-sm font-medium text-on-background">{skill.level}%</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <a
+                    href={`https://developer.mozilla.org/en-US/docs/Web/${skill.name.toLowerCase()}`}
+                    target="_blank"
+                    className="text-xs text-primary hover:underline transition-colors"
+                  >
+                    Documentation
+                  </a>
+                  <a
+                    href={`https://www.google.com/search?q=${skill.name.toLowerCase()}+tutorial`}
+                    target="_blank"
+                    className="text-xs text-muted hover:text-on-background transition-colors"
+                  >
+                    Tutorial
+                  </a>
+                </div>
+                <div className="relative h-3 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-1000 ease-out"
+                    style={{
+                      width: `${skill.level}%`,
+                      animation: `fillBar 1.5s ease-out ${0.3 + index * 0.1}s forwards`
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fillBar {
+          from {
+            width: 0%;
+          }
+          to {
+            width: ${skills.map(s => s.level)}%;
+          }
+        }
+      `}</style>
     </section>
   );
 }

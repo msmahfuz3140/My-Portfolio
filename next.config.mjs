@@ -19,7 +19,7 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
-  trailingSlash: true,
+  trailingSlash: false,
   skipTrailingSlashRedirect: true,
   distDir: 'out',
   experimental: {

@@ -16,12 +16,9 @@ const nextConfig = {
       },
     ],
     formats: ['image/webp', 'image/avif'],
-    unoptimized: true,
   },
-  output: 'export',
   trailingSlash: false,
   skipTrailingSlashRedirect: true,
-  distDir: 'out',
   experimental: {
     missingSuspenseWithCSRBug: true,
   },

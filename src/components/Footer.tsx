@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="space-y-2 mt-6">
             <div className="flex items-center gap-3 text-primary font-body-md">
               <MapPin size={18} />
-              <span>Dhaka, Bangladesh</span>
+              <span>Netrakona, Mymensingh, Bangladesh</span>
             </div>
           </div>
         </div>

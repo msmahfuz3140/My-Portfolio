@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 const technologies = [
   { name: "HTML", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg", percentage: 95 },
@@ -61,9 +62,11 @@ export default function Technologies() {
           {/* First Line */}
           {technologies.map((tech, index) => (
             <div key={`marquee-1-${index}`} className="flex items-center gap-4 shrink-0">
-              <img
+              <Image
                 src={tech.logo}
                 alt={tech.name}
+                width={40}
+                height={40}
                 className="w-10 h-10 object-contain filter brightness-0 invert dark:brightness-100"
                 suppressHydrationWarning
               />
@@ -74,9 +77,11 @@ export default function Technologies() {
           {/* Second Line */}
           {technologies.map((tech, index) => (
             <div key={`marquee-2-${index}`} className="flex items-center gap-4 shrink-0">
-              <img
+              <Image
                 src={tech.logo}
                 alt={tech.name}
+                width={40}
+                height={40}
                 className="w-10 h-10 object-contain filter brightness-0 invert dark:brightness-100"
                 suppressHydrationWarning
               />

@@ -39,26 +39,28 @@ export default function About() {
           <h2 className="font-h2 text-4xl md:text-h2 text-on-background font-bold">About Me</h2>
           <div className="space-y-6 text-muted font-body-lg">
             <p>
-              I am <span className="text-primary font-bold">MD MAHFUZUL HAQUE</span>, a passionate <span className="text-primary font-bold">Web Developer</span> currently pursuing
+              I am <span className="text-primary font-bold">MD MAHFUZUL HAQUE</span>, a passionate <span className="text-primary font-bold">Full Stack Developer</span> currently pursuing
               <span className="text-secondary font-medium">Diploma in Computer Science Technology (CST)</span> at
-              <span className="text-secondary font-medium">Mymensingh Polytechnic Institute</span>. I have developed a strong foundation in
-              modern web technologies and software development principles.
+              <span className="text-secondary font-medium">Mymensingh Polytechnic Institute</span>. As a <span className="text-primary font-medium">Next.js Developer in Bangladesh</span>,
+              I have developed a strong foundation in modern web technologies and software development principles.
             </p>
             <p>
-              My experience includes developing full-stack applications using MongoDB, Express.js, React, and Node.js,
-              with a focus on writing clean, maintainable code and designing intuitive user interfaces.
-              I have specialized training in <span className="text-cyan-400 font-medium">web development</span> and
-              <span className="text-cyan-400 font-medium">cybersecurity</span>, ensuring I build secure and efficient applications.
+              My experience includes developing full-stack applications using the <span className="text-cyan-400 font-medium">MERN stack</span> (MongoDB, Express.js, React, and Node.js),
+              with expertise in <span className="text-cyan-400 font-medium">Next.js development</span>, <span className="text-cyan-400 font-medium">TypeScript</span>, and modern web frameworks.
+              I specialize in building <span className="text-primary font-medium">SEO-optimized web applications</span>, <span className="text-primary font-medium">responsive designs</span>, and
+              <span className="text-primary font-medium">scalable API architectures</span> that deliver exceptional user experiences.
             </p>
             <p>
-              I am continuously expanding my skill set by exploring advanced topics such as
-              <span className="text-cyan-400 font-medium">cybersecurity</span>, authentication systems, API architecture, and distributed systems.
-              My focus on <span className="text-cyan-400 font-medium">cybersecurity</span> ensures I build secure, protected applications
-              that safeguard user data and maintain system integrity.
+              As a <span className="text-cyan-400 font-medium">MERN Stack Developer from Mymensingh</span>, I have specialized training in
+              <span className="text-cyan-400 font-medium">web development</span> and <span className="text-cyan-400 font-medium">cybersecurity</span>, ensuring I build secure and efficient applications.
+              I continuously expand my skill set by exploring advanced topics such as authentication systems, distributed systems,
+              and performance optimization techniques that make applications faster and more reliable.
             </p>
             <p>
-              Based in <span className="text-primary font-medium">Mymensingh</span>, I approach development with a problem-solving mindset and a
-              commitment to delivering reliable and impactful digital products that combine robust security measures
+              Based in <span className="text-primary font-medium">Mymensingh, Bangladesh</span>, I approach development with a problem-solving mindset and a
+              commitment to delivering reliable and impactful digital products. Whether you need a <span className="text-secondary font-medium">Freelance Web Developer</span>
+              for your project or looking to collaborate on innovative solutions, I bring expertise in <span className="text-secondary font-medium">React development</span>,
+              <span className="text-secondary font-medium">Node.js backend development</span>, and <span className="text-secondary font-medium">modern web technologies</span>
               to create innovative, safe, and efficient solutions.
             </p>
           </div>

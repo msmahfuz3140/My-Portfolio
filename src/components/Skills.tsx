@@ -4,19 +4,20 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Database, Code2, Terminal, Cloud, Laptop, Network, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 const skills = [
-  { name: "HTML", icon: <img src="https://skillicons.dev/icons?i=html" className="w-10 h-10" alt="HTML5" suppressHydrationWarning />, level: 90 },
-  { name: "CSS", icon: <img src="https://skillicons.dev/icons?i=css" className="w-10 h-10" alt="CSS" suppressHydrationWarning />, level: 95 },
-  { name: "JavaScript", icon: <img src="https://skillicons.dev/icons?i=js" className="w-10 h-10" alt="JavaScript" suppressHydrationWarning />, level: 85 },
-  { name: "React", icon: <img src="https://skillicons.dev/icons?i=react" className="w-10 h-10" alt="React" suppressHydrationWarning />, level: 88 },
-  { name: "Next.js", icon: <img src="https://skillicons.dev/icons?i=nextjs" className="w-10 h-10" alt="Next.js" suppressHydrationWarning />, level: 75 },
-  { name: "Node.js", icon: <img src="https://skillicons.dev/icons?i=nodejs" className="w-10 h-10" alt="Node.js" suppressHydrationWarning />, level: 82 },
-  { name: "Express", icon: <img src="https://skillicons.dev/icons?i=express" className="w-10 h-10" alt="Express" suppressHydrationWarning />, level: 78 },
-  { name: "MongoDB", icon: <img src="https://skillicons.dev/icons?i=mongodb" className="w-10 h-10" alt="MongoDB" suppressHydrationWarning />, level: 76 },
-  { name: "TailwindCSS", icon: <img src="https://skillicons.dev/icons?i=tailwind" className="w-10 h-10" alt="TailwindCSS" suppressHydrationWarning />, level: 92 },
-  { name: "Git", icon: <img src="https://skillicons.dev/icons?i=git" className="w-10 h-10" alt="Git" suppressHydrationWarning />, level: 85 },
-  { name: "Python", icon: <img src="https://skillicons.dev/icons?i=py" className="w-10 h-10" alt="Python" suppressHydrationWarning />, level: 70 },
+  { name: "HTML", icon: <Image src="https://skillicons.dev/icons?i=html" width={40} height={40} className="w-10 h-10" alt="HTML5" suppressHydrationWarning />, level: 90 },
+  { name: "CSS", icon: <Image src="https://skillicons.dev/icons?i=css" width={40} height={40} className="w-10 h-10" alt="CSS" suppressHydrationWarning />, level: 95 },
+  { name: "JavaScript", icon: <Image src="https://skillicons.dev/icons?i=js" width={40} height={40} className="w-10 h-10" alt="JavaScript" suppressHydrationWarning />, level: 85 },
+  { name: "React", icon: <Image src="https://skillicons.dev/icons?i=react" width={40} height={40} className="w-10 h-10" alt="React" suppressHydrationWarning />, level: 88 },
+  { name: "Next.js", icon: <Image src="https://skillicons.dev/icons?i=nextjs" width={40} height={40} className="w-10 h-10" alt="Next.js" suppressHydrationWarning />, level: 75 },
+  { name: "Node.js", icon: <Image src="https://skillicons.dev/icons?i=nodejs" width={40} height={40} className="w-10 h-10" alt="Node.js" suppressHydrationWarning />, level: 82 },
+  { name: "Express", icon: <Image src="https://skillicons.dev/icons?i=express" width={40} height={40} className="w-10 h-10" alt="Express" suppressHydrationWarning />, level: 78 },
+  { name: "MongoDB", icon: <Image src="https://skillicons.dev/icons?i=mongodb" width={40} height={40} className="w-10 h-10" alt="MongoDB" suppressHydrationWarning />, level: 76 },
+  { name: "TailwindCSS", icon: <Image src="https://skillicons.dev/icons?i=tailwind" width={40} height={40} className="w-10 h-10" alt="TailwindCSS" suppressHydrationWarning />, level: 92 },
+  { name: "Git", icon: <Image src="https://skillicons.dev/icons?i=git" width={40} height={40} className="w-10 h-10" alt="Git" suppressHydrationWarning />, level: 85 },
+  { name: "Python", icon: <Image src="https://skillicons.dev/icons?i=py" width={40} height={40} className="w-10 h-10" alt="Python" suppressHydrationWarning />, level: 70 },
 ];
 
 export default function Skills() {

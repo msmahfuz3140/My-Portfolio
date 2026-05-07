@@ -114,13 +114,19 @@ export default function Hero() {
             A passionate Web Developer specializing in building exceptional digital experiences with modern web technologies. I turn complex problems into elegant, scalable code.
           </p>
           <div className="flex flex-wrap gap-3 pt-8">
-            <Link
-              href="/resume.pdf"
-              target="_blank"
+            <button
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/resume.pdf';
+                link.download = 'MD_Mahfuzul_Haque_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
               className="hero-btn gradient-border-btn px-10 py-4 rounded-full font-label-caps text-on-background hover:scale-105 transition-transform flex items-center gap-2"
             >
               {mounted && <FileText size={18} />} Download Resume
-            </Link>
+            </button>
             <Link
               href="#contact"
               className="hero-btn glass-card border-2 border-outline-variant px-10 py-4 rounded-full font-label-caps text-on-background hover:border-primary hover:scale-105 transition-transform flex items-center gap-2"

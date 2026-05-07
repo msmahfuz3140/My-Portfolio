@@ -153,7 +153,7 @@ export default function Projects() {
                       target="_blank"
                       className="p-2 glass-card rounded-full text-on-background/60 hover:text-primary transition-colors flex items-center justify-center"
                     >
-                      <img src="https://skillicons.dev/icons?i=github" className="w-5 h-5" alt="GitHub" />
+                      <Image src="https://skillicons.dev/icons?i=github" width={20} height={20} className="w-5 h-5" alt="GitHub" />
                     </Link>
                     {project.liveUrl && (
                       <Link
@@ -174,7 +174,7 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <h2  
+                <h2
                   className="flex items-center gap-2 text-on-background font-label-caps text-xs group-hover:gap-4 transition-all"
                 >
                   View Case Study <ArrowRight size={14} className="text-primary" />

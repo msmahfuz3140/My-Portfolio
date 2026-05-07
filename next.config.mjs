@@ -14,6 +14,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.simpleicons.org",
       },
+      {
+        protocol: "https",
+        hostname: "mdmahfuzulhaque3140.vercel.app",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
     ],
     formats: ['image/webp', 'image/avif'],
   },

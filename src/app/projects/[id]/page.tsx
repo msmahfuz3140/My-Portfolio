@@ -54,7 +54,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               target="_blank"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
             >
-              <img src="https://skillicons.dev/icons?i=github" className="w-5 h-5" alt="GitHub" />
+              <Image src="https://skillicons.dev/icons?i=github" width={20} height={20} className="w-5 h-5" alt="GitHub" />
               View Code
             </Link>
             {project.liveUrl && (
@@ -126,11 +126,41 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   if (!project) {
     return {
       title: 'Project Not Found',
+      description: 'The requested project could not be found.',
     };
   }
 
   return {
-    title: `${project.title} - Portfolio`,
-    description: project.description,
+    title: `${project.title} | Md Mahfuzul Haque`,
+    description: `${project.title} - ${project.description}. A project by Md Mahfuzul Haque, Full Stack Developer specializing in Next.js, React, and Node.js.`,
+    keywords: [
+      project.title,
+      ...project.techStack,
+      "Md Mahfuzul Haque",
+      "Full Stack Developer",
+      "Next.js Developer",
+      "React Developer",
+      "Web Development",
+      "Portfolio Project",
+    ],
+    openGraph: {
+      title: `${project.title} - Md Mahfuzul Haque Portfolio`,
+      description: project.description,
+      images: [
+        {
+          url: project.image,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} - Md Mahfuzul Haque`,
+      description: project.description,
+      images: [project.image],
+    },
   };
 }

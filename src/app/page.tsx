@@ -8,6 +8,8 @@ import Qualifications from "@/components/Qualifications";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
+export const dynamic = 'force-static';
+
 export default function Home() {
   return (
     <main className="min-h-screen">

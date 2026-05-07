@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 
+const baseUrl = 'https://mdmahfuzulhaque3140.vercel.app';
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://mdmahfuzulhaque3140.vercel.app';
-  
   return [
     {
       url: baseUrl,
@@ -14,25 +14,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/projects`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/#about`,
+      url: `${baseUrl}/skills`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#skills`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
     },
   ];
 }

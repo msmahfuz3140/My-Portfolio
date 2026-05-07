@@ -108,6 +108,7 @@ export default function RootLayout({
       <head>
         {/* seo meta */}
         <meta name="google-site-verification" content="y0F7MnypH0HYZXy2Uwrs_9qXexXYkee42rGrFdFIUc4" />
+        
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"

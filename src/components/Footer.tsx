@@ -47,35 +47,35 @@ export default function Footer() {
                 target="_blank"
                 className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-blue-400 transition-all overflow-hidden"
               >
-                <Image src="https://skillicons.dev/icons?i=github" width={24} height={24} className="w-6 h-6" alt="GitHub" />
+                <img src="https://skillicons.dev/icons?i=github" width={24} height={24} className="w-6 h-6" alt="GitHub" />
               </Link>
               <Link
                 href="https://www.linkedin.com/in/msmahfuz3140"
                 target="_blank"
                 className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-blue-400 transition-all overflow-hidden"
               >
-                <Image src="https://skillicons.dev/icons?i=linkedin" width={24} height={24} className="w-6 h-6" alt="LinkedIn" />
+                <img src="https://skillicons.dev/icons?i=linkedin" width={24} height={24} className="w-6 h-6" alt="LinkedIn" />
               </Link>
               <Link
                 href="https://wa.me/8801956016119"
                 target="_blank"
                 className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-blue-400 transition-all overflow-hidden"
               >
-                <Image src="https://cdn.simpleicons.org/whatsapp/25D366" width={24} height={24} className="w-6 h-6" alt="WhatsApp" />
+                <img src="https://cdn.simpleicons.org/whatsapp/25D366" width={24} height={24} className="w-6 h-6" alt="WhatsApp" />
               </Link>
               <Link
                 href="https://www.instagram.com/msmahfuz3140"
                 target="_blank"
                 className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-blue-400 transition-all overflow-hidden"
               >
-                <Image src="https://skillicons.dev/icons?i=instagram" width={24} height={24} className="w-6 h-6" alt="Instagram" />
+                <img src="https://skillicons.dev/icons?i=instagram" width={24} height={24} className="w-6 h-6" alt="Instagram" />
               </Link>
               <Link
                 href="https://www.facebook.com/msmahfuz3140"
                 target="_blank"
                 className="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-blue-400 transition-all overflow-hidden"
               >
-                <Image src="https://cdn.simpleicons.org/facebook/1877F2" width={24} height={24} className="w-6 h-6" alt="Facebook" />
+                <img src="https://cdn.simpleicons.org/facebook/1877F2" width={24} height={24} className="w-6 h-6" alt="Facebook" />
               </Link>
             </div>
           </div>

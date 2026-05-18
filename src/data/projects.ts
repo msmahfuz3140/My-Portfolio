@@ -194,5 +194,45 @@ export const projects: Project[] = [
       "Context API",
       "REST API"
     ]
+  },
+
+  {
+    id: "blood-donation",
+    title: "Blood Donation",
+
+    description:
+      "A web application for connecting blood donors with recipients in need.",
+    fullDescription:
+      "Blood Donation is a web application designed to facilitate the connection between blood donors and recipients in need. The platform allows users to register as donors or seek blood donations, providing a seamless way to manage and locate blood donation opportunities. The project demonstrates state management, component-based architecture, and interactive user experience similar to real-world healthcare platforms.",
+
+    image: "/images/blood-donation.png",
+
+    tags: ["React","Next.js", "JavaScript", "Tailwind CSS", "State Management", "API Integration"],
+
+    liveUrl: "https://blood-donation-mpi.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/blood-donation-practice-project",
+
+    challenges: [
+      "Implementing logic with credit limitations.",
+      "Managing dynamic team updates using React state.",
+      "Preventing duplicate player selection.",
+      "Designing an interactive and responsive fantasy UI."
+    ],
+
+    improvements: [
+      "Add user authentication system.",
+      "Introduce leaderboard and scoring system.",
+      "Enable team saving and editing feature.",
+      "Add real-time match score integration."
+    ],
+
+    techStack: [
+      "React.js",
+      "Next.js",
+      "JavaScript (ES6)",
+      "Tailwind CSS",
+      "Context API",
+      "REST API"
+    ]
   }
 ];

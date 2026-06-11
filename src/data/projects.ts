@@ -14,70 +14,60 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "keenkeeper",
-    title: "KeenKeeper",
-    description: "A comprehensive friend hub and relationship management platform.",
-    fullDescription: "KeenKeeper is a sophisticated social management tool designed to help users maintain meaningful connections. It features friend tracking, activity logging, and reminders for important social milestones.",
-    image: "/images/keen-keeper.png",
-    tags: ["REACT.JS", "NODE.JS", "MONGODB"],
-    liveUrl: "https://keen-keeper-wine.vercel.app/",
-    githubUrl: "https://github.com/msmahfuz3140/Keen_Keeper",
-    challenges: [
-      "Designing a scalable database schema for social connections.",
-      "Implementing real-time notifications for social reminders.",
-      "Ensuring high data privacy for user relationship logs."
-    ],
-    improvements: [
-      "Integrating with major social media platforms for contact syncing.",
-      "Adding AI-driven relationship insights and suggestions.",
-      "Implementing a group management system for social circles."
-    ],
-    techStack: ["React.js", "Node.js", "MongoDB"]
-  },
-  {
-    id: "digitools",
-    title: "Digi Tools",
-    description: "Marketplace for premium digital products and AI subscriptions.",
-    fullDescription: "Digi Tools is a one-stop-shop for digital creators. It offers a variety of products including AI tool subscriptions, social media kits, and premium stock assets with a seamless checkout experience.",
-    image: "/images/DigiTools.png",
-    tags: ["NEXT.JS", "STRIPE", "MONGODB"],
-    liveUrl: "as-6-digital-tools.netlify.app",
-    githubUrl: "https://github.com/msmahfuz3140/Assignment-6_DigitalTools",
-    challenges: [
-      "Implementing a secure digital product delivery system.",
-      "Managing recurring subscription billing with Stripe.",
-      "Optimizing the storefront for high conversion rates."
-    ],
-    improvements: [
-      "Implementing a multi-vendor marketplace system.",
-      "Adding an affiliate marketing dashboard.",
-      "Integrating AI-powered product recommendations."
-    ],
-    techStack: ["Next.js", "Stripe", "MongoDB", "Tailwind CSS", "Framer Motion"]
-  },
+    id: "tutor-finder",
+    title: "Tutor Finder",
 
-  // {
-  //   id: "bookvibe",
-  //   title: "Bookvibe",
-  //   description: "A social platform for book lovers to share reviews and recommendations.",
-  //   fullDescription: "Bookvibe is a community-driven platform for bibliophiles. Users can track their reading progress, write detailed reviews, and discover new books through personalized recommendations.",
-  //   image: "/images/Book-vibe.png",
-  //   tags: ["REACT.JS", "FIREBASE", "CONTEXT API"],
-  //   liveUrl: "real-book-vibe.netlify.app",
-  //   githubUrl: "https://github.com/msmahfuz3140/Book-Vibe-Project",
-  //   challenges: [
-  //     "Building a performant search system for a large book database.",
-  //     "Managing complex state for user reading lists.",
-  //     "Implementing a responsive UI for different device sizes."
-  //   ],
-  //   improvements: [
-  //     "Adding a barcode scanner for quick book searching.",
-  //     "Integrating with third-party book selling platforms.",
-  //     "Implementing a dark mode for better night-time reading experience."
-  //   ],
-  //   techStack: ["React.js", "Firebase", "Context API", "Tailwind CSS"]
-  // },
+    description:
+      "A full-stack platform that helps students find qualified tutors and allows tutors to manage their teaching services efficiently.",
 
+    fullDescription:
+      "Tutor Finder is a full-stack web application designed to bridge the gap between students and tutors. Students can explore tutor profiles, search based on their learning needs, and connect with suitable tutors. Tutors can create and manage their profiles, showcase their expertise, and update their teaching information. The platform includes secure authentication, database-driven content management, and a responsive user experience that reflects real-world educational marketplace applications.",
+
+    image: "/images/tutor-finder.png",
+
+    tags: [
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Better Auth",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "Full Stack"
+    ],
+
+    liveUrl: "https://tutor-finder-project.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/Tutor_Finder_Project",
+
+    challenges: [
+      "Implementing secure authentication and session management using Better Auth.",
+      "Managing protected routes and role-based access control.",
+      "Designing efficient MongoDB queries for tutor discovery and filtering.",
+      "Handling client-server data synchronization in a full-stack environment.",
+      "Building a responsive and user-friendly interface across devices."
+    ],
+
+    improvements: [
+      "Add tutor booking and scheduling functionality.",
+      "Integrate online payment methods for tutor sessions.",
+      "Implement real-time messaging between tutors and students.",
+      "Introduce tutor reviews and rating systems.",
+      "Add email notifications and appointment reminders."
+    ],
+
+    techStack: [
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Better Auth",
+      "TypeScript",
+      "JavaScript (ES6+)",
+      "Tailwind CSS",
+      "REST API"
+    ]
+  },
   {
     id: "qurbani-hut",
     title: "Qurbani Hut",
@@ -91,8 +81,8 @@ export const projects: Project[] = [
 
     tags: ["Next.js", "MongoDB", "React", "Tailwind CSS", "REST API"],
 
-    liveUrl: "https://qurbani-hut-mocha.vercel.app/",
-    githubUrl: "https://github.com/msmahfuz3140/QurbaniHat-Project",
+    liveUrl: "https://qurbani-hut-new.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/qurbani-Hut",
 
     challenges: [
       "Designing a user-friendly marketplace for farmers and buyers.",
@@ -117,6 +107,72 @@ export const projects: Project[] = [
       "REST API"
     ]
   },
+  {
+    id: "keenkeeper",
+    title: "KeenKeeper",
+    description: "A comprehensive friend hub and relationship management platform.",
+    fullDescription: "KeenKeeper is a sophisticated social management tool designed to help users maintain meaningful connections. It features friend tracking, activity logging, and reminders for important social milestones.",
+    image: "/images/keen-keeper.png",
+    tags: ["REACT.JS", "NODE.JS", "MONGODB"],
+    liveUrl: "https://keen-keeper-wine.vercel.app/",
+    githubUrl: "https://github.com/msmahfuz3140/Keen_Keeper",
+    challenges: [
+      "Designing a scalable database schema for social connections.",
+      "Implementing real-time notifications for social reminders.",
+      "Ensuring high data privacy for user relationship logs."
+    ],
+    improvements: [
+      "Integrating with major social media platforms for contact syncing.",
+      "Adding AI-driven relationship insights and suggestions.",
+      "Implementing a group management system for social circles."
+    ],
+    techStack: ["React.js", "Node.js", "MongoDB"]
+  },
+  // {
+  //   id: "digitools",
+  //   title: "Digi Tools",
+  //   description: "Marketplace for premium digital products and AI subscriptions.",
+  //   fullDescription: "Digi Tools is a one-stop-shop for digital creators. It offers a variety of products including AI tool subscriptions, social media kits, and premium stock assets with a seamless checkout experience.",
+  //   image: "/images/DigiTools.png",
+  //   tags: ["NEXT.JS", "STRIPE", "MONGODB"],
+  //   liveUrl: "https://as-6-digital-tools.netlify.app",
+  //   githubUrl: "https://github.com/msmahfuz3140/Assignment-6_DigitalTools",
+  //   challenges: [
+  //     "Implementing a secure digital product delivery system.",
+  //     "Managing recurring subscription billing with Stripe.",
+  //     "Optimizing the storefront for high conversion rates."
+  //   ],
+  //   improvements: [
+  //     "Implementing a multi-vendor marketplace system.",
+  //     "Adding an affiliate marketing dashboard.",
+  //     "Integrating AI-powered product recommendations."
+  //   ],
+  //   techStack: ["Next.js", "Stripe", "MongoDB", "Tailwind CSS", "Framer Motion"]
+  // },
+
+  // {
+  //   id: "bookvibe",
+  //   title: "Bookvibe",
+  //   description: "A social platform for book lovers to share reviews and recommendations.",
+  //   fullDescription: "Bookvibe is a community-driven platform for bibliophiles. Users can track their reading progress, write detailed reviews, and discover new books through personalized recommendations.",
+  //   image: "/images/Book-vibe.png",
+  //   tags: ["REACT.JS", "FIREBASE", "CONTEXT API"],
+  //   liveUrl: "real-book-vibe.netlify.app",
+  //   githubUrl: "https://github.com/msmahfuz3140/Book-Vibe-Project",
+  //   challenges: [
+  //     "Building a performant search system for a large book database.",
+  //     "Managing complex state for user reading lists.",
+  //     "Implementing a responsive UI for different device sizes."
+  //   ],
+  //   improvements: [
+  //     "Adding a barcode scanner for quick book searching.",
+  //     "Integrating with third-party book selling platforms.",
+  //     "Implementing a dark mode for better night-time reading experience."
+  //   ],
+  //   techStack: ["React.js", "Firebase", "Context API", "Tailwind CSS"]
+  // },
+
+
   {
     id: "dragon-news",
     title: "Dragon News",
@@ -207,7 +263,7 @@ export const projects: Project[] = [
 
     image: "/images/blood-donation.png",
 
-    tags: ["React","Next.js", "JavaScript", "Tailwind CSS", "State Management", "API Integration"],
+    tags: ["React", "Next.js", "JavaScript", "Tailwind CSS", "State Management", "API Integration"],
 
     liveUrl: "https://blood-donation-mpi.vercel.app",
     githubUrl: "https://github.com/msmahfuz3140/blood-donation-practice-project",
@@ -234,5 +290,5 @@ export const projects: Project[] = [
       "Context API",
       "REST API"
     ]
-  }
+  },
 ];

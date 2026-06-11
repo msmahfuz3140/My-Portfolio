@@ -98,14 +98,20 @@ export default function Hero() {
         </div>
 
         <div className="space-y-stack-md">
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-label-caps text-secondary tracking-[0.2em] uppercase block"
+            className="flex flex-wrap items-center gap-3"
           >
-            DIPLOMA CST STUDENT / WEB DEVELOPER
-          </motion.span>
+            <span className="font-label-caps text-secondary tracking-[0.2em] uppercase">
+              DIPLOMA CST STUDENT / WEB DEVELOPER
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-green-400 text-[10px] font-label-caps uppercase tracking-wider">Open to Work</span>
+            </span>
+          </motion.div>
           <h1 ref={titleRef} className="font-h1 text-4xl sm:text-5xl md:text-h1 text-on-background leading-tight">
             Hi, I&apos;m <br />
             <span className="gradient-text font-extrabold">MD MAHFUZUL HAQUE</span>

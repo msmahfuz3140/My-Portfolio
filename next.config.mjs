@@ -22,6 +22,14 @@ const nextConfig = {
         protocol: "http",
         hostname: "localhost",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "ghchart.rshah.org",
+      },
     ],
     formats: ['image/webp', 'image/avif'],
   },

@@ -132,8 +132,8 @@ export default function Projects() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
         {projects && projects.length > 0 ? (
           projects.map((project, index) => (
-            <div key={project.id} className="project-card glass-card group relative overflow-hidden rounded-2xl opacity-0">
-              <div className="aspect-video relative overflow-hidden">
+            <div key={project.id} className="project-card glass-card group relative overflow-hidden rounded-2xl opacity-0 hover:border-primary/30 transition-colors">
+              <Link href={`/projects/${project.id}`} className="aspect-video relative overflow-hidden block">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -143,10 +143,12 @@ export default function Projects() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
-              </div>
+              </Link>
               <div className="p-6 sm:p-8 relative">
                 <div className="flex justify-between items-start mb-4 gap-4">
-                  <h3 className="font-h3 text-[22px] text-on-background leading-tight">{project.title}</h3>
+                  <Link href={`/projects/${project.id}`}>
+                    <h3 className="font-h3 text-[22px] text-on-background leading-tight hover:text-primary transition-colors">{project.title}</h3>
+                  </Link>
                   <div className="flex gap-2 shrink-0">
                     <Link
                       href={project.githubUrl}
@@ -174,11 +176,12 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <h2
+                <Link
+                  href={`/projects/${project.id}`}
                   className="flex items-center gap-2 text-on-background font-label-caps text-xs group-hover:gap-4 transition-all"
                 >
                   View Case Study <ArrowRight size={14} className="text-primary" />
-                </h2>
+                </Link>
               </div>
             </div>
           ))

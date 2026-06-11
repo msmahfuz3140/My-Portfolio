@@ -6,6 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, Globe, Send, ArrowRight, Phone, CheckCircle2, AlertCircle } from "lucide-react";
 import Toast from "./Toast";
 
+const EMAIL = "mdmahfuzulhaque3140@gmail.com";
+const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
+
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formMessage, setFormMessage] = useState("");
@@ -75,10 +78,18 @@ export default function Contact() {
                 <Mail className="text-blue-400 group-hover:scale-110 transition-transform" size={32} />
                 <h5 className="text-on-background font-h3 text-[18px]">Email</h5>
               </div>
-              <p className="text-muted text-sm mb-4">mdmahfuzulhaque3140@gmail.com</p>
               <a
-                href="mailto:mdmahfuzulhaque3140@gmail.com"
+                href={GMAIL_COMPOSE_URL}
                 target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted text-sm mb-4 block hover:text-blue-400 transition-colors cursor-pointer"
+              >
+                {EMAIL}
+              </a>
+              <a
+                href={GMAIL_COMPOSE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-blue-400 flex items-center gap-2 font-label-caps text-xs group-hover:gap-4 transition-all"
               >
                 Write me <ArrowRight size={14} />

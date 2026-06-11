@@ -30,7 +30,7 @@ export const services: Service[] = [
     description: "High-converting landing pages for businesses, portfolios, and product launches.",
     icon: "rocket",
     features: ["Modern UI Design", "Mobile-First Layout", "Contact Integration", "Fast Loading Speed"],
-    price: "From $80",
+    price: "From $30",
   },
   {
     id: "maintenance",
@@ -38,6 +38,6 @@ export const services: Service[] = [
     description: "Quick fixes, performance improvements, and ongoing support for existing projects.",
     icon: "wrench",
     features: ["Bug Fixing", "Performance Tuning", "Feature Updates", "Code Refactoring"],
-    price: "From $50",
+    price: "From $80",
   },
 ];

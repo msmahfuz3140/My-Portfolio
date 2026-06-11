@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { projects } from "@/data/projects";
+import { FaGithub } from "react-icons/fa";
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>;
@@ -79,7 +80,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             target="_blank"
             className="gradient-border-btn inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-label-caps text-sm text-on-background hover:scale-105 transition-transform"
           >
-            <Image src="https://skillicons.dev/icons?i=github" width={20} height={20} className="w-5 h-5" alt="GitHub" />
+            <FaGithub size={16}/>
             View Code
           </Link>
           {project.liveUrl && (

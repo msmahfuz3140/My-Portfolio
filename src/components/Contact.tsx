@@ -138,21 +138,27 @@ export default function Contact() {
                   onSubmit={async (e) => {
                     e.preventDefault();
                     setStatus("loading");
-                    const formData = new FormData(e.currentTarget);
+                    const form = e.currentTarget;
+                    const formData = new FormData(form);
 
-                    // IMPORTANT: You will need a Web3Forms Access Key
-                    // Get it at https://web3forms.com/
-                    formData.append("access_key", "cb93b39b-e6fc-4239-81a4-f61e793d265b");
+                    const payload = {
+                      name: formData.get("name") as string,
+                      address: formData.get("address") as string,
+                      phone: formData.get("phone") as string,
+                      email: formData.get("email") as string,
+                      message: formData.get("message") as string,
+                    };
 
                     try {
-                      const response = await fetch("https://api.web3forms.com/submit", {
+                      const response = await fetch("/api/contact", {
                         method: "POST",
-                        body: formData
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
                       });
                       const data = await response.json();
                       if (data.success) {
                         setStatus("success");
-                        (e.target as HTMLFormElement).reset();
+                        form.reset();
                         setToastMessage("✅ Message sent successfully! I'll get back to you soon.");
                         setToastType("success");
                         setShowToast(true);
@@ -163,7 +169,7 @@ export default function Contact() {
                         setToastType("error");
                         setShowToast(true);
                       }
-                    } catch (err) {
+                    } catch {
                       setStatus("error");
                       setFormMessage("Failed to send message. Please try again.");
                       setToastMessage("❌ Network error. Please check your connection and try again.");
@@ -222,13 +228,25 @@ export default function Contact() {
                   </div>
                   <div className="space-y-2">
                     <label className="font-label-caps text-muted text-xs">MESSAGE</label>
-                    <textarea
-                      name="message"
-                      required
-                      rows={4}
-                      placeholder="Write your message about project"
-                      className="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-background focus:border-blue-500 focus:ring-0 outline-none transition-colors"
-                    ></textarea>
+                    <div className="relative rounded-2xl border border-outline-variant bg-surface-container overflow-hidden focus-within:border-blue-500 transition-colors">
+                      <div className="flex items-center gap-2 px-4 py-3 border-b border-outline-variant/50 bg-surface/50">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary text-xs font-bold">
+                          You
+                        </div>
+                        <span className="text-muted text-xs font-label-caps">Write your project message</span>
+                      </div>
+                      <textarea
+                        name="message"
+                        required
+                        rows={5}
+                        placeholder="Hi Mahfuz, I have a project idea and would like to discuss..."
+                        className="w-full bg-transparent px-4 py-4 text-on-background focus:ring-0 outline-none resize-none placeholder:text-muted/50"
+                      ></textarea>
+                      <div className="px-4 py-2 border-t border-outline-variant/50 flex items-center justify-between">
+                        <span className="text-muted/60 text-[10px] font-label-caps">Your message will be delivered securely</span>
+                        <Send size={14} className="text-muted/40" />
+                      </div>
+                    </div>
                   </div>
 
                   {status === "error" && (

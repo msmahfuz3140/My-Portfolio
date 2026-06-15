@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, Inbox, ChevronDown } from "lucide-react";
+import { Menu, X, Sun, Moon, Inbox, ChevronDown, LayoutDashboard } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import AdminInboxModal from "./AdminInboxModal";
+import AdminModal from "./AdminModal";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -22,7 +22,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [inboxOpen, setInboxOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
 
@@ -45,9 +45,9 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const openInbox = () => {
+  const openAdmin = () => {
     setProfileOpen(false);
-    setInboxOpen(true);
+    setAdminOpen(true);
   };
 
   return (
@@ -85,13 +85,13 @@ export default function Navbar() {
                     </div>
                     <button
                       type="button"
-                      onClick={openInbox}
+                      onClick={openAdmin}
                       className="w-full flex items-center gap-3 px-4 py-3.5 text-left text-on-background hover:bg-primary/10 transition-colors group cursor-auto"
                     >
                       <span className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
-                        <Inbox size={16} />
+                        <LayoutDashboard size={16} />
                       </span>
-                      <span className="font-label-caps text-xs tracking-wide">Inbox</span>
+                      <span className="font-label-caps text-xs tracking-wide">Admin</span>
                     </button>
                   </motion.div>
                 )}
@@ -183,7 +183,7 @@ export default function Navbar() {
         </AnimatePresence>
       </nav>
 
-      <AdminInboxModal open={inboxOpen} onClose={() => setInboxOpen(false)} />
+      <AdminModal open={adminOpen} onClose={() => setAdminOpen(false)} />
     </>
   );
 }

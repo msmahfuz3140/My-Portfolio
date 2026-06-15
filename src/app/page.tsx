@@ -13,10 +13,15 @@ import Qualifications from "@/components/Qualifications";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { getProjects } from "@/lib/projects";
+import { getBlogs } from "@/lib/blogs";
 
-export const dynamic = "force-static";
+export const revalidate = 0;
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getProjects();
+  const blogs = await getBlogs();
+
   return (
     <main className="min-h-screen">
       <Navbar />
@@ -25,11 +30,11 @@ export default function Home() {
       <About />
       <Skills />
       <Technologies />
-      <Projects />
+      <Projects initialProjects={projects} />
       <Services />
       <GitHubActivity />
       <Testimonials />
-      <Blog />
+      <Blog initialBlogs={blogs} />
       <Qualifications />
       <FAQ />
       <Contact />

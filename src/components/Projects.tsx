@@ -16,9 +16,30 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight, ExternalLink } from "lucide-react";
-import { projects } from "@/data/projects";
+import { Project } from "@/data/projects";
 
-export default function Projects() {
+interface ProjectsProps {
+  initialProjects?: Project[];
+}
+
+export default function Projects({ initialProjects = [] }: ProjectsProps) {
+  const [projectsList, setProjectsList] = useState<Project[]>(initialProjects);
+
+  useEffect(() => {
+    if (initialProjects && initialProjects.length > 0) {
+      setProjectsList(initialProjects);
+    } else {
+      fetch("/api/projects")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.projects) {
+            setProjectsList(data.projects);
+          }
+        })
+        .catch((err) => console.error("Error loading projects:", err));
+    }
+  }, [initialProjects]);
+
   const mounted = useNoSSR();
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -77,7 +98,7 @@ export default function Projects() {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
-          {projects.map((project) => (
+          {projectsList.map((project) => (
             <div key={project.id} className="project-card glass-card group relative overflow-hidden rounded-2xl">
               <Link href={`/projects/${project.id}`} className="aspect-video relative overflow-hidden block group">
                 <div className="w-full h-full bg-muted animate-pulse" suppressHydrationWarning />
@@ -130,8 +151,8 @@ export default function Projects() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
-        {projects && projects.length > 0 ? (
-          projects.map((project, index) => (
+        {projectsList && projectsList.length > 0 ? (
+          projectsList.map((project, index) => (
             <div key={project.id} className="project-card glass-card group relative overflow-hidden rounded-2xl opacity-0 hover:border-primary/30 transition-colors">
               <Link href={`/projects/${project.id}`} className="aspect-video relative overflow-hidden block">
                 <Image

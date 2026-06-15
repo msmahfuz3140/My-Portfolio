@@ -16,14 +16,36 @@ module.exports = {
     };
   },
   additionalPaths: async (config) => {
-    // Add dynamic project pages
-    const { projects } = require('./src/data/projects.ts');
-    
-    return projects.map((project) => ({
-      loc: `/projects/${project.id}`,
-      changefreq: 'weekly',
-      priority: 0.8,
-      lastmod: new Date().toISOString(),
-    }));
+    // Read project IDs from dynamic projects.json if it exists, otherwise fall back to static TS parsing
+    const fs = require("fs");
+    const path = require("path");
+    try {
+      let ids = [];
+      const jsonPath = path.join(__dirname, "data/projects.json");
+      
+      if (fs.existsSync(jsonPath)) {
+        const raw = fs.readFileSync(jsonPath, "utf-8");
+        const list = JSON.parse(raw);
+        ids = list.map((p) => p.id);
+      } else {
+        const filePath = path.join(__dirname, "src/data/projects.ts");
+        const content = fs.readFileSync(filePath, "utf-8");
+        const idRegex = /id:\s*["']([^"']+)["']/g;
+        let match;
+        while ((match = idRegex.exec(content)) !== null) {
+          ids.push(match[1]);
+        }
+      }
+      
+      return ids.map((id) => ({
+        loc: `/projects/${id}`,
+        changefreq: "weekly",
+        priority: 0.8,
+        lastmod: new Date().toISOString(),
+      }));
+    } catch (err) {
+      console.error("Failed to parse project IDs for sitemap:", err);
+      return [];
+    }
   },
 };

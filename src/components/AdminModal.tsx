@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AdminInboxPanel from "./AdminInboxPanel";
+import AdminPanel from "./AdminPanel";
 
-type AdminInboxModalProps = {
+type AdminModalProps = {
   open: boolean;
   onClose: () => void;
 };
 
-export default function AdminInboxModal({ open, onClose }: AdminInboxModalProps) {
+export default function AdminModal({ open, onClose }: AdminModalProps) {
   const [panelKey, setPanelKey] = useState(0);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function AdminInboxModal({ open, onClose }: AdminInboxModalProps)
         >
           <button
             type="button"
-            aria-label="Close inbox"
+            aria-label="Close admin panel"
             onClick={onClose}
             className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-auto"
           />
@@ -53,9 +53,9 @@ export default function AdminInboxModal({ open, onClose }: AdminInboxModalProps)
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl glass-card rounded-[24px] shadow-2xl overflow-hidden border border-outline-variant cursor-auto"
+            className="relative w-full max-w-5xl glass-card rounded-[24px] shadow-2xl overflow-hidden border border-outline-variant cursor-auto"
           >
-            <AdminInboxPanel key={panelKey} mode="modal" onClose={onClose} />
+            <AdminPanel key={panelKey} mode="modal" onClose={onClose} />
           </motion.div>
         </motion.div>
       )}

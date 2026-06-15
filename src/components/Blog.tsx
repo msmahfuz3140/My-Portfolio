@@ -1,13 +1,29 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookOpen, Calendar, Clock, ArrowUpRight, Tag } from "lucide-react";
 import Link from "next/link";
-import { blogPosts } from "@/data/blog";
+import { BlogPost } from "@/data/blog";
 
-export default function Blog() {
+export default function Blog({ initialBlogs = [] }: { initialBlogs?: BlogPost[] }) {
+  const [blogsList, setBlogsList] = useState<BlogPost[]>(initialBlogs);
+
+  useEffect(() => {
+    if (initialBlogs && initialBlogs.length > 0) {
+      setBlogsList(initialBlogs);
+    } else {
+      fetch("/api/blogs")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.blogs) {
+            setBlogsList(data.blogs);
+          }
+        })
+        .catch((err) => console.error("Error loading blogs:", err));
+    }
+  }, [initialBlogs]);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -49,7 +65,7 @@ export default function Blog() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {blogPosts.map((post) => (
+          {blogsList.map((post) => (
             <Link
               key={post.id}
               href={post.url}

@@ -1,5 +1,5 @@
-import AdminInboxPanel from "@/components/AdminInboxPanel";
+import AdminPanel from "@/components/AdminPanel";
 
 export default function AdminMessagesPage() {
-  return <AdminInboxPanel mode="page" />;
+  return <AdminPanel mode="page" />;
 }

@@ -13,7 +13,7 @@ import {
   AlertTriangle,
   Sparkles,
 } from "lucide-react";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/lib/projects";
 import { FaGithub } from "react-icons/fa";
 
 interface ProjectPageProps {
@@ -22,6 +22,7 @@ interface ProjectPageProps {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id } = await params;
+  const projects = await getProjects();
   const project = projects.find((p) => p.id === id);
 
   if (!project) notFound();
@@ -220,12 +221,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   );
 }
 
+export const revalidate = 0;
+
 export async function generateStaticParams() {
+  const projects = await getProjects();
   return projects.map((project) => ({ id: project.id }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { id } = await params;
+  const projects = await getProjects();
   const project = projects.find((p) => p.id === id);
 
   if (!project) {

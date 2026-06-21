@@ -3,6 +3,9 @@ import { Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
+import BackToTop from "@/components/BackToTop";
+import PageLoader from "@/components/PageLoader";
+import WhatsAppChat from "@/components/WhatsAppChat";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -155,7 +158,10 @@ export default function RootLayout({
             {children}
           </SmoothScroll>
         </ThemeProvider>
+        <PageLoader />
         <CustomCursor />
+        <WhatsAppChat />
+        <BackToTop />
       </body>
     </html>
   );

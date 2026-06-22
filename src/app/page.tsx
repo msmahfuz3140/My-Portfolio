@@ -12,6 +12,9 @@ import Blog from "@/components/Blog";
 import Qualifications from "@/components/Qualifications";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
+import Achievements from "@/components/Achievements";
+import StatsCounter from "@/components/StatsCounter";
+import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import { getProjects } from "@/lib/projects";
 import { getBlogs } from "@/lib/blogs";
@@ -36,6 +39,9 @@ export default async function Home() {
       <Testimonials />
       <Blog initialBlogs={blogs} />
       <Qualifications />
+      <Achievements />
+      <StatsCounter />
+      <Newsletter />
       <FAQ />
       <Contact />
       <Footer />

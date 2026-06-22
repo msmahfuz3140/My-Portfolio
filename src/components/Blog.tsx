@@ -66,12 +66,11 @@ export default function Blog({ initialBlogs = [] }: { initialBlogs?: BlogPost[] 
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {blogsList.map((post) => (
-            <Link
-              key={post.id}
-              href={post.url}
-              target="_blank"
-              className="blog-card glass-card rounded-2xl overflow-hidden group hover:border-primary/30 transition-all block"
-            >
+              <Link
+                  key={post.id}
+                  href={`/blog/${post.id}`}
+                  className="blog-card glass-card rounded-2xl overflow-hidden group hover:border-primary/30 transition-all block"
+                >
               <div className="p-8">
                 <div className="flex items-center justify-between mb-5">
                   <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-label-caps uppercase tracking-wider">

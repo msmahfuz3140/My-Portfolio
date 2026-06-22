@@ -37,6 +37,13 @@ import {
   Download,
   Eye as EyeIcon,
   BarChart3,
+  Activity,
+  CalendarDays,
+  ArrowUpRight,
+  ArrowDownRight,
+  PieChart,
+  HelpCircle,
+  Layers,
 } from "lucide-react";
 import type { ContactMessage } from "@/types/message";
 import type { Project } from "@/data/projects";
@@ -44,9 +51,11 @@ import type { BlogPost } from "@/data/blog";
 import type { Testimonial } from "@/types/testimonial";
 import type { Skill } from "@/types/skill";
 import type { SiteSettings as SiteSettingsType } from "@/types/site-settings";
+import type { FAQItem } from "@/types/faq";
+import type { Service } from "@/data/services";
 
 type FilterType = "all" | "unread" | "read";
-type TabType = "overview" | "inbox" | "projects" | "blog" | "testimonials" | "skills" | "settings";
+type TabType = "overview" | "inbox" | "projects" | "blog" | "testimonials" | "skills" | "faq" | "services" | "settings";
 
 type AdminPanelProps = {
   mode?: "modal" | "page";
@@ -117,6 +126,23 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
   const [testOrg, setTestOrg] = useState("");
   const [testContent, setTestContent] = useState("");
   const [testRating, setTestRating] = useState(5);
+
+  // FAQ CRUD state
+  const [faqList, setFaqList] = useState<FAQItem[]>([]);
+  const [faqFormOpen, setFaqFormOpen] = useState(false);
+  const [currentFaq, setCurrentFaq] = useState<FAQItem | null>(null);
+  const [faqQuestion, setFaqQuestion] = useState("");
+  const [faqAnswer, setFaqAnswer] = useState("");
+
+  // Services CRUD state
+  const [servicesList, setServicesList] = useState<Service[]>([]);
+  const [serviceFormOpen, setServiceFormOpen] = useState(false);
+  const [currentService, setCurrentService] = useState<Service | null>(null);
+  const [servTitle, setServTitle] = useState("");
+  const [servDescription, setServDescription] = useState("");
+  const [servIcon, setServIcon] = useState("");
+  const [servFeatures, setServFeatures] = useState("");
+  const [servPrice, setServPrice] = useState("");
 
   // Skills CRUD state
   const [skillFormOpen, setSkillFormOpen] = useState(false);
@@ -267,6 +293,8 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
       fetchBlogs();
       fetchTestimonials();
       fetchSkills();
+      fetchFaqs();
+      fetchServices();
       fetchSiteSettings();
       setInputSecret("");
     } catch {
@@ -678,6 +706,178 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
     }
   };
 
+  // FAQ Form handlers
+  const openFaqForm = (faq?: FAQItem) => {
+    setError("");
+    if (faq) {
+      setCurrentFaq(faq);
+      setFaqQuestion(faq.question);
+      setFaqAnswer(faq.answer);
+    } else {
+      setCurrentFaq(null);
+      setFaqQuestion("");
+      setFaqAnswer("");
+    }
+    setFaqFormOpen(true);
+  };
+
+  const handleFaqSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const payload = { question: faqQuestion, answer: faqAnswer };
+
+    try {
+      const url = currentFaq ? `/api/faq/${currentFaq.id}` : "/api/faq";
+      const method = currentFaq ? "PUT" : "POST";
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json", "x-admin-secret": secret },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.message || "Failed to save FAQ.");
+      } else {
+        fetchFaqs();
+        setFaqFormOpen(false);
+        setCurrentFaq(null);
+      }
+    } catch {
+      setError("Network error. Failed to save FAQ.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFaqDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this FAQ?")) return;
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(`/api/faq/${id}`, {
+        method: "DELETE",
+        headers: { "x-admin-secret": secret },
+      });
+      if (res.ok) {
+        fetchFaqs();
+      } else {
+        const data = await res.json();
+        setError(data.message || "Failed to delete FAQ.");
+      }
+    } catch {
+      setError("Network error. Failed to delete FAQ.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchFaqs = useCallback(async () => {
+    try {
+      const res = await fetch("/api/faq");
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setFaqList(data.faqs);
+      }
+    } catch (err) {
+      console.error("Failed to load FAQs:", err);
+    }
+  }, []);
+
+  // Services Form handlers
+  const openServiceForm = (service?: Service) => {
+    setError("");
+    if (service) {
+      setCurrentService(service);
+      setServTitle(service.title);
+      setServDescription(service.description);
+      setServIcon(service.icon);
+      setServFeatures(service.features.join(", "));
+      setServPrice(service.price);
+    } else {
+      setCurrentService(null);
+      setServTitle("");
+      setServDescription("");
+      setServIcon("layers");
+      setServFeatures("");
+      setServPrice("From $");
+    }
+    setServiceFormOpen(true);
+  };
+
+  const handleServiceSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const payload = {
+      title: servTitle,
+      description: servDescription,
+      icon: servIcon,
+      features: servFeatures.split(",").map((f) => f.trim()).filter(Boolean),
+      price: servPrice,
+    };
+
+    try {
+      const url = currentService ? `/api/services/${currentService.id}` : "/api/services";
+      const method = currentService ? "PUT" : "POST";
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json", "x-admin-secret": secret },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.message || "Failed to save service.");
+      } else {
+        fetchServices();
+        setServiceFormOpen(false);
+        setCurrentService(null);
+      }
+    } catch {
+      setError("Network error. Failed to save service.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleServiceDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this service?")) return;
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(`/api/services/${id}`, {
+        method: "DELETE",
+        headers: { "x-admin-secret": secret },
+      });
+      if (res.ok) {
+        fetchServices();
+      } else {
+        const data = await res.json();
+        setError(data.message || "Failed to delete service.");
+      }
+    } catch {
+      setError("Network error. Failed to delete service.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchServices = useCallback(async () => {
+    try {
+      const res = await fetch("/api/services");
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setServicesList(data.services);
+      }
+    } catch (err) {
+      console.error("Failed to load services:", err);
+    }
+  }, []);
+
   // Site Settings handlers
   const openSettingsForm = () => {
     if (!siteSettings) return;
@@ -939,6 +1139,104 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
             Connected & Synced
           </p>
         </div>
+      </div>
+
+      {/* Charts Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Read/Unread Messages Bar Chart */}
+        <div className="glass-card rounded-2xl p-5">
+          <h4 className="font-h3 text-sm text-on-background font-bold mb-4 flex items-center gap-2">
+            <BarChart3 size={16} className="text-primary" />
+            Message Status
+          </h4>
+          <div className="flex items-end gap-3 h-32">
+            <div className="flex-1 flex flex-col items-center gap-2">
+              <span className="text-lg font-bold text-on-background">{analytics.totalMessages - analytics.unreadMessages}</span>
+              <div
+                className="w-full rounded-t-lg bg-green-500/70 transition-all duration-500"
+                style={{ height: `${analytics.totalMessages > 0 ? ((analytics.totalMessages - analytics.unreadMessages) / analytics.totalMessages) * 100 : 0}%`, minHeight: analytics.totalMessages > 0 ? '20px' : '0px' }}
+              />
+              <span className="text-[10px] text-muted font-label-caps">Read</span>
+            </div>
+            <div className="flex-1 flex flex-col items-center gap-2">
+              <span className="text-lg font-bold text-on-background">{analytics.unreadMessages}</span>
+              <div
+                className="w-full rounded-t-lg bg-orange-400/70 transition-all duration-500"
+                style={{ height: `${analytics.totalMessages > 0 ? (analytics.unreadMessages / analytics.totalMessages) * 100 : 0}%`, minHeight: analytics.unreadMessages > 0 ? '20px' : '0px' }}
+              />
+              <span className="text-[10px] text-muted font-label-caps">Unread</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Distribution */}
+        <div className="glass-card rounded-2xl p-5">
+          <h4 className="font-h3 text-sm text-on-background font-bold mb-4 flex items-center gap-2">
+            <PieChart size={16} className="text-purple-400" />
+            Content Overview
+          </h4>
+          <div className="space-y-3">
+            {[
+              { label: "Projects", value: analytics.totalProjects, color: "bg-blue-500" },
+              { label: "Blogs", value: analytics.totalBlogs, color: "bg-purple-500" },
+              { label: "Testimonials", value: analytics.totalTestimonials, color: "bg-amber-500" },
+              { label: "Skills", value: analytics.totalSkills, color: "bg-green-500" },
+            ].map((item) => {
+              const maxVal = Math.max(analytics.totalProjects, analytics.totalBlogs, analytics.totalTestimonials, analytics.totalSkills, 1);
+              return (
+                <div key={item.label} className="flex items-center gap-3">
+                  <span className="w-20 text-[10px] font-label-caps text-muted shrink-0">{item.label}</span>
+                  <div className="flex-1 h-4 rounded-full bg-surface-container overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${item.color} transition-all duration-500`}
+                      style={{ width: `${(item.value / maxVal) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-xs font-bold text-on-background w-6 text-right">{item.value}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Recent Activity Log */}
+      <div className="glass-card rounded-2xl p-5">
+        <h4 className="font-h3 text-sm text-on-background font-bold mb-4 flex items-center gap-2">
+          <Activity size={16} className="text-cyan-400" />
+          Recent Activity
+        </h4>
+        {messages.length === 0 && testimonialsList.length === 0 ? (
+          <p className="text-muted text-xs text-center py-6">No recent activity to show.</p>
+        ) : (
+          <div className="space-y-2 max-h-[200px] overflow-y-auto">
+            {/* Show recent messages */}
+            {[...messages].slice(0, 5).map((msg) => (
+              <div key={msg.id} className="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container/50 text-xs">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${!msg.read ? 'bg-primary/20 text-primary' : 'bg-surface-container text-muted'}`}>
+                  <Mail size={12} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-on-background truncate font-medium">{msg.name}</p>
+                  <p className="text-muted truncate">{msg.message}</p>
+                </div>
+                <span className="text-muted/60 text-[10px] shrink-0">{formatDate(msg.createdAt)}</span>
+              </div>
+            ))}
+            {/* Show if there are testimonials */}
+            {[...testimonialsList].slice(0, 3).map((t) => (
+              <div key={t.id} className="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container/50 text-xs">
+                <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+                  <Quote size={12} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-on-background truncate font-medium">{t.name}</p>
+                  <p className="text-muted truncate">{t.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1556,6 +1854,170 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
     );
   };
 
+  // TAB: FAQ Manager
+  const renderFaqTab = () => {
+    if (faqFormOpen) {
+      return (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between gap-3 shrink-0">
+            <button onClick={() => setFaqFormOpen(false)} className="flex items-center gap-1.5 text-muted hover:text-on-background text-xs font-label-caps transition-colors">
+              <ChevronLeft size={16} /> Back to FAQ List
+            </button>
+            <h3 className="font-h3 text-base text-on-background font-bold">
+              {currentFaq ? "Edit FAQ" : "Add New FAQ"}
+            </h3>
+          </div>
+          <form onSubmit={handleFaqSubmit} className="glass-card p-5 md:p-6 rounded-2xl space-y-5">
+            <div className="space-y-1">
+              <label className="font-label-caps text-muted text-[10px]">Question *</label>
+              <input type="text" required value={faqQuestion} onChange={(e) => setFaqQuestion(e.target.value)} placeholder="e.g. What services do you offer?" className="w-full bg-surface-container border border-outline-variant rounded-lg px-3.5 py-2 text-sm text-on-background focus:border-primary outline-none transition-colors" />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-caps text-muted text-[10px]">Answer *</label>
+              <textarea required rows={5} value={faqAnswer} onChange={(e) => setFaqAnswer(e.target.value)} placeholder="Write the detailed answer..." className="w-full bg-surface-container border border-outline-variant rounded-lg px-3.5 py-2 text-sm text-on-background focus:border-primary outline-none transition-colors resize-y" />
+            </div>
+            <div className="flex justify-end gap-3 pt-4 border-t border-outline-variant/50">
+              <button type="button" onClick={() => setFaqFormOpen(false)} className="px-5 py-2.5 rounded-lg border border-outline-variant text-muted hover:text-on-background hover:bg-surface-container/50 text-xs font-label-caps transition-all">Cancel</button>
+              <button type="submit" disabled={loading} className="gradient-border-btn px-6 py-2.5 rounded-lg text-xs font-label-caps text-on-background disabled:opacity-50">{loading ? "Saving..." : "Save FAQ"}</button>
+            </div>
+          </form>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between gap-3 shrink-0">
+          <div>
+            <h3 className="font-h2 text-xl text-on-background font-bold">FAQ Manager</h3>
+            <p className="text-muted text-sm mt-1">Manage frequently asked questions on your site.</p>
+          </div>
+          <button onClick={() => openFaqForm()} className="flex items-center gap-1.5 px-4.5 py-2.5 bg-primary text-on-primary rounded-xl text-xs font-label-caps font-bold hover:shadow-lg transition-all scale-100 active:scale-95 shrink-0">
+            <Plus size={15} /> Add FAQ
+          </button>
+        </div>
+        {faqList.length === 0 ? (
+          <div className="glass-card rounded-2xl p-12 text-center flex-col flex items-center justify-center">
+            <HelpCircle className="text-muted mb-3" size={40} />
+            <h3 className="font-h3 text-base text-on-background mb-1">No FAQs loaded</h3>
+            <p className="text-muted text-xs">FAQ list is empty.</p>
+            <button onClick={fetchFaqs} className="mt-4 flex items-center gap-1 px-4 py-2 bg-surface-container rounded-lg text-xs font-label-caps hover:bg-surface-container-high transition-colors">
+              <RefreshCw size={12} /> Refresh
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {faqList.map((faq) => (
+              <div key={faq.id} className="glass-card p-5 rounded-xl border border-outline-variant/50">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-sm text-on-background">{faq.question}</p>
+                    <p className="text-muted text-xs mt-1 line-clamp-2">{faq.answer}</p>
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button onClick={() => openFaqForm(faq)} className="p-2 rounded-lg hover:bg-primary/10 text-muted hover:text-primary transition-colors" title="Edit"><Edit size={14} /></button>
+                    <button onClick={() => handleFaqDelete(faq.id)} className="p-2 rounded-lg hover:bg-red-500/10 text-muted hover:text-red-400 transition-colors" title="Delete"><Trash2 size={14} /></button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  // TAB: Services Manager
+  const renderServicesTab = () => {
+    if (serviceFormOpen) {
+      return (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between gap-3 shrink-0">
+            <button onClick={() => setServiceFormOpen(false)} className="flex items-center gap-1.5 text-muted hover:text-on-background text-xs font-label-caps transition-colors">
+              <ChevronLeft size={16} /> Back to Services List
+            </button>
+            <h3 className="font-h3 text-base text-on-background font-bold">
+              {currentService ? `Edit: ${currentService.title}` : "Add New Service"}
+            </h3>
+          </div>
+          <form onSubmit={handleServiceSubmit} className="glass-card p-5 md:p-6 rounded-2xl space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="font-label-caps text-muted text-[10px]">Service Title *</label>
+                <input type="text" required value={servTitle} onChange={(e) => setServTitle(e.target.value)} placeholder="e.g. Full Stack Web App" className="w-full bg-surface-container border border-outline-variant rounded-lg px-3.5 py-2 text-sm text-on-background focus:border-primary outline-none transition-colors" />
+              </div>
+              <div className="space-y-1">
+                <label className="font-label-caps text-muted text-[10px]">Price *</label>
+                <input type="text" required value={servPrice} onChange={(e) => setServPrice(e.target.value)} placeholder="e.g. From $200" className="w-full bg-surface-container border border-outline-variant rounded-lg px-3.5 py-2 text-sm text-on-background focus:border-primary outline-none transition-colors" />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-caps text-muted text-[10px]">Description *</label>
+              <textarea required rows={2} value={servDescription} onChange={(e) => setServDescription(e.target.value)} placeholder="Brief description of the service..." className="w-full bg-surface-container border border-outline-variant rounded-lg px-3.5 py-2 text-sm text-on-background focus:border-primary outline-none transition-colors resize-y" />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-caps text-muted text-[10px]">Features (Comma separated) *</label>
+              <input type="text" required value={servFeatures} onChange={(e) => setServFeatures(e.target.value)} placeholder="e.g. Next.js / React, Node.js REST API" className="w-full bg-surface-container border border-outline-variant rounded-lg px-3.5 py-2 text-sm text-on-background focus:border-primary outline-none transition-colors" />
+            </div>
+            <div className="flex justify-end gap-3 pt-4 border-t border-outline-variant/50">
+              <button type="button" onClick={() => setServiceFormOpen(false)} className="px-5 py-2.5 rounded-lg border border-outline-variant text-muted hover:text-on-background hover:bg-surface-container/50 text-xs font-label-caps transition-all">Cancel</button>
+              <button type="submit" disabled={loading} className="gradient-border-btn px-6 py-2.5 rounded-lg text-xs font-label-caps text-on-background disabled:opacity-50">{loading ? "Saving..." : "Save Service"}</button>
+            </div>
+          </form>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between gap-3 shrink-0">
+          <div>
+            <h3 className="font-h2 text-xl text-on-background font-bold">Services Manager</h3>
+            <p className="text-muted text-sm mt-1">Manage the services you offer to clients.</p>
+          </div>
+          <button onClick={() => openServiceForm()} className="flex items-center gap-1.5 px-4.5 py-2.5 bg-primary text-on-primary rounded-xl text-xs font-label-caps font-bold hover:shadow-lg transition-all scale-100 active:scale-95 shrink-0">
+            <Plus size={15} /> Add Service
+          </button>
+        </div>
+        {servicesList.length === 0 ? (
+          <div className="glass-card rounded-2xl p-12 text-center flex-col flex items-center justify-center">
+            <Layers className="text-muted mb-3" size={40} />
+            <h3 className="font-h3 text-base text-on-background mb-1">No services loaded</h3>
+            <p className="text-muted text-xs">Services list is empty.</p>
+            <button onClick={fetchServices} className="mt-4 flex items-center gap-1 px-4 py-2 bg-surface-container rounded-lg text-xs font-label-caps hover:bg-surface-container-high transition-colors">
+              <RefreshCw size={12} /> Refresh
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {servicesList.map((service) => (
+              <div key={service.id} className="glass-card p-5 rounded-2xl border border-outline-variant/50">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="font-bold text-sm text-on-background">{service.title}</p>
+                    <p className="text-muted text-xs mt-1">{service.description}</p>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {service.features.map((f, i) => (
+                        <span key={i} className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] rounded-full font-label-caps">{f}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between pt-3 border-t border-outline-variant/30">
+                  <p className="text-sm font-bold text-green-400">{service.price}</p>
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => openServiceForm(service)} className="p-1.5 rounded-lg hover:bg-primary/10 text-muted hover:text-primary transition-colors" title="Edit"><Edit size={12} /></button>
+                    <button onClick={() => handleServiceDelete(service.id)} className="p-1.5 rounded-lg hover:bg-red-500/10 text-muted hover:text-red-400 transition-colors" title="Delete"><Trash2 size={12} /></button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   // TAB: Site Settings
   const renderSettingsTab = () => {
     if (settingsFormOpen) {
@@ -1695,6 +2157,12 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
             <button onClick={() => { setActiveTab("skills"); fetchSkills(); }} className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-label-caps transition-all shrink-0 ${activeTab === "skills" ? "bg-primary text-on-primary" : "text-muted hover:text-on-background hover:bg-surface-container/55"}`}>
               <Code2 size={15} /> Skills
             </button>
+            <button onClick={() => { setActiveTab("faq"); fetchFaqs(); }} className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-label-caps transition-all shrink-0 ${activeTab === "faq" ? "bg-primary text-on-primary" : "text-muted hover:text-on-background hover:bg-surface-container/55"}`}>
+              <HelpCircle size={15} /> FAQ
+            </button>
+            <button onClick={() => { setActiveTab("services"); fetchServices(); }} className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-label-caps transition-all shrink-0 ${activeTab === "services" ? "bg-primary text-on-primary" : "text-muted hover:text-on-background hover:bg-surface-container/55"}`}>
+              <Layers size={15} /> Services
+            </button>
             <button onClick={() => { setActiveTab("settings"); fetchSiteSettings(); }} className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-label-caps transition-all shrink-0 ${activeTab === "settings" ? "bg-primary text-on-primary" : "text-muted hover:text-on-background hover:bg-surface-container/55"}`}>
               <Settings size={15} /> Settings
             </button>
@@ -1734,6 +2202,8 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
           {activeTab === "blog" && renderBlogTab()}
           {activeTab === "testimonials" && renderTestimonialsTab()}
           {activeTab === "skills" && renderSkillsTab()}
+          {activeTab === "faq" && renderFaqTab()}
+          {activeTab === "services" && renderServicesTab()}
           {activeTab === "settings" && renderSettingsTab()}
         </div>
       </div>

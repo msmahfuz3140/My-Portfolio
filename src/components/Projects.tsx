@@ -45,40 +45,39 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (!mounted || projectsList.length === 0) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Use fromTo to ensure visibility and add a slight delay to allow layout to settle
-      gsap.fromTo(".project-card",
-        {
-          y: 30,
-          opacity: 0
-        },
+      gsap.fromTo(
+        ".project-card",
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.8,
           stagger: 0.2,
           ease: "power2.out",
+          immediateRender: false,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 85%", // Trigger slightly earlier
-            toggleActions: "play none none reverse",
+            start: "top 85%",
+            once: true,
           },
         }
       );
     }, sectionRef);
 
-    // Refresh ScrollTrigger after a short delay to account for layout shifts
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
+    const refreshTimers = [100, 500, 1000].map((delay) =>
+      setTimeout(() => ScrollTrigger.refresh(), delay)
+    );
 
     return () => {
       ctx.revert();
-      clearTimeout(timer);
+      refreshTimers.forEach(clearTimeout);
     };
-  }, []);
+  }, [mounted, projectsList.length]);
 
   if (!mounted) {
     return (
@@ -157,7 +156,7 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
             <motion.div
               key={project.id}
               layoutId={`project-card-${project.id}`}
-              className="project-card glass-card group relative overflow-hidden rounded-2xl opacity-0 hover:border-primary/30 transition-colors"
+              className="project-card glass-card group relative overflow-hidden rounded-2xl hover:border-primary/30 transition-colors"
               style={{ originX: 0.5, originY: 0 }}
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}

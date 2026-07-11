@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function PageLoader() {
   const [loading, setLoading] = useState(true);
@@ -18,6 +20,16 @@ export default function PageLoader() {
       return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      const timer = setTimeout(() => {
+        gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.refresh();
+      }, 600); // 500ms animation duration + 100ms buffer
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
 
   return (
     <AnimatePresence>

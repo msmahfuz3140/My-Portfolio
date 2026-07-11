@@ -25,10 +25,17 @@ export default function Achievements() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      gsap.from(".achievement-card", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-        y: 30, opacity: 0, duration: 0.6, stagger: 0.12, ease: "power2.out",
-      });
+      gsap.fromTo(".achievement-card",
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: "power2.out",
+        }
+      );
     }, sectionRef);
     return () => ctx.revert();
   }, []);

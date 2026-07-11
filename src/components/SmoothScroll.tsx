@@ -16,8 +16,24 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     gsap.ticker.add(update);
 
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    // Refresh ScrollTrigger at key points to catch any layout shifts
+    const timers = [
+      setTimeout(() => ScrollTrigger.refresh(), 500),
+      setTimeout(() => ScrollTrigger.refresh(), 1000),
+      setTimeout(() => ScrollTrigger.refresh(), 2000),
+      setTimeout(() => ScrollTrigger.refresh(), 4000),
+    ];
+
     return () => {
       gsap.ticker.remove(update);
+      window.removeEventListener("load", handleLoad);
+      timers.forEach(clearTimeout);
     };
   }, []);
 

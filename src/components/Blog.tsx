@@ -13,12 +13,18 @@ export default function Blog({ initialBlogs = [] }: { initialBlogs?: BlogPost[] 
   useEffect(() => {
     if (initialBlogs && initialBlogs.length > 0) {
       setBlogsList(initialBlogs);
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
     } else {
       fetch("/api/blogs")
         .then((res) => res.json())
         .then((data) => {
           if (data.success && data.blogs) {
             setBlogsList(data.blogs);
+            setTimeout(() => {
+              ScrollTrigger.refresh();
+            }, 150);
           }
         })
         .catch((err) => console.error("Error loading blogs:", err));
@@ -29,14 +35,17 @@ export default function Blog({ initialBlogs = [] }: { initialBlogs?: BlogPost[] 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      gsap.from(".blog-card", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power2.out",
-      });
+      gsap.fromTo(".blog-card",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: "power2.out",
+        }
+      );
     }, sectionRef);
     return () => ctx.revert();
   }, []);

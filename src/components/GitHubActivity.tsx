@@ -39,14 +39,17 @@ export default function GitHubActivity() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      gsap.from(".github-card", {
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-        y: 40,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: "power2.out",
-      });
+      gsap.fromTo(".github-card",
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power2.out",
+        }
+      );
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -64,6 +67,10 @@ export default function GitHubActivity() {
         // silently fail — section shows fallback
       } finally {
         setLoading(false);
+        // Refresh ScrollTrigger after DOM has updated with the loaded profile and repositories
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 150);
       }
     }
     fetchGitHub();

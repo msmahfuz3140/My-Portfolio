@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 // Hook to prevent SSR hydration issues
 function useNoSSR() {
@@ -153,7 +154,14 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
         {projectsList && projectsList.length > 0 ? (
           projectsList.map((project, index) => (
-            <div key={project.id} className="project-card glass-card group relative overflow-hidden rounded-2xl opacity-0 hover:border-primary/30 transition-colors">
+            <motion.div
+              key={project.id}
+              layoutId={`project-card-${project.id}`}
+              className="project-card glass-card group relative overflow-hidden rounded-2xl opacity-0 hover:border-primary/30 transition-colors"
+              style={{ originX: 0.5, originY: 0 }}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
               <Link href={`/projects/${project.id}`} className="aspect-video relative overflow-hidden block">
                 <Image
                   src={project.image}
@@ -167,9 +175,11 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
               </Link>
               <div className="p-6 sm:p-8 relative">
                 <div className="flex justify-between items-start mb-4 gap-4">
-                  <Link href={`/projects/${project.id}`}>
-                    <h3 className="font-h3 text-[22px] text-on-background leading-tight hover:text-primary transition-colors">{project.title}</h3>
-                  </Link>
+                  <motion.div layoutId={`project-title-${project.id}`}>
+                    <Link href={`/projects/${project.id}`}>
+                      <h3 className="font-h3 text-[22px] text-on-background leading-tight hover:text-primary transition-colors">{project.title}</h3>
+                    </Link>
+                  </motion.div>
                   <div className="flex gap-2 shrink-0">
                     <Link
                       href={project.githubUrl}
@@ -204,7 +214,7 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
                   View Case Study <ArrowRight size={14} className="text-primary" />
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))
         ) : (
           <div className="col-span-full text-center py-20">

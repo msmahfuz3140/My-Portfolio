@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, lazy, Suspense } from "react";
+const AnalyticsDashboard = lazy(() => import("@/components/AnalyticsDashboard"));
+
 import {
   Lock,
   Mail,
@@ -55,7 +57,7 @@ import type { FAQItem } from "@/types/faq";
 import type { Service } from "@/data/services";
 
 type FilterType = "all" | "unread" | "read";
-type TabType = "overview" | "inbox" | "projects" | "blog" | "testimonials" | "skills" | "faq" | "services" | "settings";
+type TabType = "overview" | "inbox" | "projects" | "blog" | "testimonials" | "skills" | "faq" | "services" | "settings" | "analytics";
 
 type AdminPanelProps = {
   mode?: "modal" | "page";
@@ -2166,6 +2168,9 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
             <button onClick={() => { setActiveTab("settings"); fetchSiteSettings(); }} className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-label-caps transition-all shrink-0 ${activeTab === "settings" ? "bg-primary text-on-primary" : "text-muted hover:text-on-background hover:bg-surface-container/55"}`}>
               <Settings size={15} /> Settings
             </button>
+            <button onClick={() => setActiveTab("analytics")} className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-label-caps transition-all shrink-0 ${activeTab === "analytics" ? "bg-primary text-on-primary" : "text-muted hover:text-on-background hover:bg-surface-container/55"}`}>
+              <BarChart3 size={15} /> Analytics
+            </button>
           </nav>
         </div>
 
@@ -2205,6 +2210,11 @@ export default function AdminPanel({ mode = "page", onClose }: AdminPanelProps) 
           {activeTab === "faq" && renderFaqTab()}
           {activeTab === "services" && renderServicesTab()}
           {activeTab === "settings" && renderSettingsTab()}
+          {activeTab === "analytics" && (
+            <Suspense fallback={<div className="flex items-center justify-center py-20 text-muted text-sm">Loading charts...</div>}>
+              <AnalyticsDashboard />
+            </Suspense>
+          )}
         </div>
       </div>
     </div>

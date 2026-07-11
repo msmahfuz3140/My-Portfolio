@@ -6,6 +6,8 @@ import CustomCursor from "@/components/CustomCursor";
 import BackToTop from "@/components/BackToTop";
 import PageLoader from "@/components/PageLoader";
 import WhatsAppChat from "@/components/WhatsAppChat";
+import CommandPalette from "@/components/CommandPalette";
+import VisitorTracker from "@/components/VisitorTracker";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -157,6 +159,8 @@ export default function RootLayout({
           <SmoothScroll>
             {children}
           </SmoothScroll>
+          <CommandPalette />
+          <VisitorTracker />
         </ThemeProvider>
         <PageLoader />
         <CustomCursor />

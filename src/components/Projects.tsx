@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import Toast from "./Toast";
 
 // Hook to prevent SSR hydration issues
 function useNoSSR() {
@@ -25,6 +26,9 @@ interface ProjectsProps {
 
 export default function Projects({ initialProjects = [] }: ProjectsProps) {
   const [projectsList, setProjectsList] = useState<Project[]>(initialProjects);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<"success" | "error" | "info">("info");
 
   useEffect(() => {
     if (initialProjects && initialProjects.length > 0) {
@@ -90,8 +94,7 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
             </p>
           </div>
           <Link
-            href="https://github.com/msmahfuz3140"
-            target="_blank"
+            href="/projects"
             className="flex items-center gap-2 text-primary font-label-caps hover:gap-4 transition-all"
           >
             Explore all projects <ArrowRight size={18} />
@@ -106,22 +109,26 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
               </Link>
               <div className="p-6 sm:p-8 relative">
                 <div className="flex justify-between items-start mb-4 gap-4">
-                  <h3 className="font-h3 text-[22px] text-on-background leading-tight">{project.title}</h3>
+                  <div>
+                    {project.category.includes("Client") && (
+                      <div className="mb-2">
+                        <span className="text-[10px] font-bold tracking-widest text-secondary bg-secondary/10 px-3 py-1 rounded-full uppercase">
+                          ⭐ Client Project
+                        </span>
+                      </div>
+                    )}
+                    <h3 className="font-h3 text-[22px] text-on-background leading-tight">{project.title}</h3>
+                  </div>
                   <div className="flex gap-2">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors text-primary text-sm font-medium"
-                    >
-                      <span>Live Demo</span>
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/50 hover:bg-muted/80 transition-colors text-muted hover:text-on-background text-sm font-medium"
-                    >
-                      <span>GitHub</span>
-                    </a>
+                    {project.githubUrl !== "private" && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/50 hover:bg-muted/80 transition-colors text-muted hover:text-on-background text-sm font-medium"
+                      >
+                        <span>GitHub</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -134,21 +141,20 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
 
   return (
     <section ref={sectionRef} className="max-w-7xl mx-auto py-16 sm:py-section-padding px-8" id="projects">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-6">
-        <div>
-          <h2 className="font-h2 text-4xl md:text-h2 text-on-background font-bold">Featured Projects.</h2>
-          <p className="text-muted font-body-lg max-w-xl mt-4">
-            Selected works that showcase technical complexity and creative problem solving.
-          </p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-6">
+          <div>
+            <h2 className="font-h2 text-4xl md:text-h2 text-on-background font-bold">Featured Projects.</h2>
+            <p className="text-muted font-body-lg max-w-xl mt-4">
+              Selected works that showcase technical complexity and creative problem solving.
+            </p>
+          </div>
+          <Link
+            href="/projects"
+            className="flex items-center gap-2 text-primary font-label-caps hover:gap-4 transition-all"
+          >
+            Explore all projects <ArrowRight size={18} />
+          </Link>
         </div>
-        <Link
-          href="https://github.com/msmahfuz3140"
-          target="_blank"
-          className="flex items-center gap-2 text-primary font-label-caps hover:gap-4 transition-all"
-        >
-          Explore all projects <ArrowRight size={18} />
-        </Link>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
         {projectsList && projectsList.length > 0 ? (
@@ -179,14 +185,16 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
                       <h3 className="font-h3 text-[22px] text-on-background leading-tight hover:text-primary transition-colors">{project.title}</h3>
                     </Link>
                   </motion.div>
-                  <div className="flex gap-2 shrink-0">
-                    <Link
-                      href={project.githubUrl}
-                      target="_blank"
-                      className="p-2 glass-card rounded-full text-on-background/60 hover:text-primary transition-colors flex items-center justify-center"
-                    >
-                      <img src="https://skillicons.dev/icons?i=github" width={20} height={20} className="w-5 h-5" alt="GitHub" />
-                    </Link>
+                   <div className="flex gap-2 shrink-0">
+                     {project.githubUrl !== "private" && (
+                       <Link
+                         href={project.githubUrl}
+                         target="_blank"
+                         className="p-2 glass-card rounded-full text-on-background/60 hover:text-primary transition-colors flex items-center justify-center"
+                       >
+                         <img src="https://skillicons.dev/icons?i=github" width={20} height={20} className="w-5 h-5" alt="GitHub" />
+                       </Link>
+                     )}
                     {project.liveUrl && (
                       <Link
                         href={project.liveUrl}
@@ -198,6 +206,13 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
                     )}
                   </div>
                 </div>
+                {project.category.includes("Client") && (
+                  <div className="mb-3">
+                    <span className="text-[10px] font-bold tracking-widest text-secondary bg-secondary/10 px-3 py-1 rounded-full uppercase">
+                      ⭐ Client Project
+                    </span>
+                  </div>
+                )}
                 <p className="text-muted text-sm mb-6 line-clamp-2">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {project.tags.slice(0, 3).map((tag) => (
@@ -205,6 +220,11 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
                       {tag}
                     </span>
                   ))}
+                  {project.tags.length > 3 && (
+                    <span className="text-[10px] font-bold tracking-widest text-muted bg-muted/10 px-3 py-1 rounded-full uppercase">
+                      +{project.tags.length - 3} more
+                    </span>
+                  )}
                 </div>
                 <Link
                   href={`/projects/${project.id}`}
@@ -221,6 +241,13 @@ export default function Projects({ initialProjects = [] }: ProjectsProps) {
           </div>
         )}
       </div>
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </section>
   );
 }

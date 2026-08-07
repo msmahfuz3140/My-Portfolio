@@ -133,6 +133,19 @@ export default function Hero() {
             >
               {mounted && <FileText size={18} />} Download Resume
             </button>
+            <button
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/cv.pdf';
+                link.download = 'MD_Mahfuzul_Haque_CV.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+              className="hero-btn glass-card border-2 border-outline-variant px-10 py-4 rounded-full font-label-caps text-on-background hover:border-primary hover:scale-105 transition-transform flex items-center gap-2"
+            >
+              {mounted && <FileText size={18} />} Download CV
+            </button>
             <Link
               href="#contact"
               className="hero-btn glass-card border-2 border-outline-variant px-10 py-4 rounded-full font-label-caps text-on-background hover:border-primary hover:scale-105 transition-transform flex items-center gap-2"

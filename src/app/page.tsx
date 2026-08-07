@@ -22,7 +22,7 @@ import { getBlogs } from "@/lib/blogs";
 export const revalidate = 0;
 
 export default async function Home() {
-  const projects = await getProjects();
+  const projects = (await getProjects()).slice(0, 6);
   const blogs = await getBlogs();
 
   return (

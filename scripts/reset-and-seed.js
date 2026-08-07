@@ -1,0 +1,171 @@
+import { MongoClient } from "mongodb";
+import { readFileSync } from "fs";
+
+const envContent = readFileSync(".env.local", "utf-8");
+const mongodbUriMatch = envContent.match(/MONGODB_URI=(.+)/);
+const MONGODB_URI = mongodbUriMatch[1].trim();
+
+const projects = [
+  {
+    id: "blood-donation",
+    title: "Blood Donation",
+    description: "A web application for connecting blood donors with recipients in need.",
+    fullDescription: "Blood Donation is a web application designed to facilitate the connection between blood donors and recipients in need. The platform allows users to register as donors or seek blood donations, providing a seamless way to manage and locate blood donation opportunities.",
+    image: "/images/blood-donation.png",
+    category: "Healthcare Platform",
+    timeline: "4 Weeks",
+    tags: ["React", "Next.js", "JavaScript", "Tailwind CSS", "State Management", "API Integration"],
+    liveUrl: "https://blood-donation-mpi.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/blood-donation-practice-project",
+    problem: "Many people struggle to find blood donors during emergencies. There's a need for a centralized platform that connects blood donors with recipients efficiently and quickly.",
+    solution: "Built a web application that connects blood donors with recipients, featuring donor registration, blood request management, and search functionality using React state management and modern UI components.",
+    results: ["Functional donor-recipient matching system", "User registration and profile management", "Blood request creation and tracking", "Responsive design for easy access on any device", "Live deployment for real-world usage"],
+    myRole: ["Designed and developed full-stack application", "Implemented state management for donor/recipient data", "Built responsive UI with Tailwind CSS", "Integrated REST API for data management", "Deployed and configured production environment"],
+    challenges: ["Implementing efficient donor-recipient matching logic", "Managing complex state for blood requests and donor data", "Designing intuitive UI for emergency situations", "Ensuring fast performance for critical search operations"],
+    improvements: ["Add user authentication and role-based access", "Implement real-time notifications for blood requests", "Add location-based donor search with maps", "Integrate SMS/email alerts for urgent requests", "Add donor eligibility verification system"],
+    techStack: ["React.js", "Next.js", "JavaScript (ES6)", "Tailwind CSS", "Context API", "REST API"]
+  },
+  {
+    id: "coaching-center",
+    title: "Coaching Center",
+    description: "A comprehensive coaching center management system - My first client project featuring modern full-stack architecture with role-based authentication and course management.",
+    fullDescription: "Coaching Center is a full-featured web application built for managing coaching centers and educational institutions. This was my first paid client project, showcasing professional full-stack development.",
+    image: "/images/coaching-center.jpg",
+    category: "Client Project - Education Management",
+    timeline: "10 Weeks",
+    tags: ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "Prisma", "Better Auth"],
+    liveUrl: "https://coching-center-frontend.vercel.app",
+    githubUrl: "private",
+    problem: "The client needed a modern digital solution to manage their coaching center operations, including student enrollment, course management, and administrative tasks.",
+    solution: "Developed a custom full-stack web application with Next.js frontend featuring modern UI/UX, Node.js/Express backend with Prisma ORM, Better Auth for secure authentication, and role-based access control.",
+    results: ["Successfully delivered first paid client project with full satisfaction", "Complete full-stack architecture with secure authentication", "Role-based access control for different user types", "Modern, responsive UI with excellent user experience", "Live deployment on Vercel with production-ready code"],
+    myRole: ["Led full-stack development as primary developer", "Designed and implemented database schema with Prisma", "Built responsive Next.js frontend with Tailwind CSS", "Developed Node.js/Express REST API backend", "Implemented Better Auth with role-based access control", "Deployed and configured production environment on Vercel"],
+    challenges: ["Understanding and implementing client requirements accurately", "Managing full-stack development lifecycle independently", "Implementing secure authentication with Better Auth", "Designing efficient Prisma schema for complex relationships", "Building responsive UI that works across all devices", "Meeting project deadlines while maintaining code quality"],
+    improvements: ["Add online payment integration for course fees", "Implement real-time notifications for assignments and announcements", "Add video conferencing for online classes", "Introduce progress tracking and analytics dashboard", "Add mobile app with React Native"],
+    techStack: ["Next.js", "React.js", "Tailwind CSS", "Node.js", "Express.js", "Prisma", "Better Auth", "REST API"]
+  },
+  {
+    id: "tutor-finder",
+    title: "Tutor Finder",
+    description: "A full-stack platform that helps students find qualified tutors and allows tutors to manage their teaching services efficiently.",
+    fullDescription: "Tutor Finder is a full-stack web application designed to bridge the gap between students and tutors. Students can explore tutor profiles, search based on their learning needs, and connect with suitable tutors.",
+    image: "/images/tutor-finder.png",
+    category: "Full Stack Marketplace",
+    timeline: "8 Weeks",
+    tags: ["Next.js", "Node.js", "Express.js", "MongoDB", "Better Auth", "TypeScript", "Tailwind CSS", "Full Stack"],
+    liveUrl: "https://tutor-finder-project.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/Tutor_Finder_Project",
+    problem: "Students in Bangladesh often struggle to find reliable, qualified tutors nearby. Traditional methods rely on word-of-mouth with no centralized platform for comparing tutors.",
+    solution: "Built a full-stack marketplace where students can search and filter tutors by subject and location, while tutors manage professional profiles with authentication, role-based dashboards, and MongoDB-backed data storage.",
+    results: ["End-to-end full-stack app with secure auth & role-based access", "Dynamic tutor search with MongoDB filtering", "Responsive UI working across mobile & desktop", "Deployed live on Vercel with production-ready architecture"],
+    myRole: ["Designed database schema and REST API architecture", "Implemented Better Auth with protected routes", "Built student & tutor dashboards with Next.js App Router", "Developed responsive UI with Tailwind CSS", "Deployed and configured production environment"],
+    challenges: ["Implementing secure authentication and session management using Better Auth.", "Managing protected routes and role-based access control.", "Designing efficient MongoDB queries for tutor discovery and filtering.", "Handling client-server data synchronization in a full-stack environment.", "Building a responsive and user-friendly interface across devices."],
+    improvements: ["Add tutor booking and scheduling functionality.", "Integrate online payment methods for tutor sessions.", "Implement real-time messaging between tutors and students.", "Introduce tutor reviews and rating systems.", "Add email notifications and appointment reminders."],
+    techStack: ["Next.js", "Node.js", "Express.js", "MongoDB", "Better Auth", "TypeScript", "Tailwind CSS", "REST API"]
+  },
+  {
+    id: "qurbani-hut",
+    title: "Qurbani Hut",
+    description: "A modern online marketplace for buying and selling Qurbani animals, designed to connect farmers directly with buyers.",
+    fullDescription: "Qurbani Hut is a modern web-based marketplace built to simplify the process of buying and selling Qurbani animals such as cows, goats, and sheep.",
+    image: "/images/quebani-hut.png",
+    category: "E-Commerce Marketplace",
+    timeline: "6 Weeks",
+    tags: ["Next.js", "MongoDB", "React", "Tailwind CSS", "REST API"],
+    liveUrl: "https://qurbani-hut-new.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/qurbani-Hut",
+    problem: "During Qurbani season, farmers and small sellers lack a digital platform to list animals and reach urban buyers.",
+    solution: "Created a clean marketplace with product listing, category browsing, dynamic filtering, and a mobile-first interface.",
+    results: ["Functional marketplace with dynamic product listings", "Category-based browsing and filtering system", "Mobile-responsive design for rural & urban users", "Live deployment with smooth API data handling"],
+    myRole: ["Built product listing and marketplace UI", "Integrated MongoDB for dynamic data management", "Implemented API fetching with error handling", "Designed responsive layouts for all screen sizes", "Deployed application on Vercel"],
+    challenges: ["Designing a user-friendly marketplace for farmers and buyers.", "Managing dynamic product listings and filtering systems.", "Handling API data fetching and error management.", "Creating responsive layouts for mobile and desktop users."],
+    improvements: ["Implement secure authentication and user dashboard.", "Add online payment gateway integration.", "Introduce real-time chat between buyer and seller.", "Add advanced search and category filtering system."],
+    techStack: ["Next.js", "React.js", "Tailwind CSS", "Node.js", "MongoDB", "REST API"]
+  },
+  {
+    id: "keenkeeper",
+    title: "KeenKeeper",
+    description: "A comprehensive friend hub and relationship management platform.",
+    fullDescription: "KeenKeeper is a sophisticated social management tool designed to help users maintain meaningful connections. It features friend tracking, activity logging, and reminders for important social milestones.",
+    image: "/images/keen-keeper.png",
+    category: "Social Management App",
+    timeline: "5 Weeks",
+    tags: ["REACT.JS", "NODE.JS", "MONGODB"],
+    liveUrl: "https://keen-keeper-wine.vercel.app/",
+    githubUrl: "https://github.com/msmahfuz3140/Keen_Keeper",
+    problem: "People often lose track of important social connections and milestones — birthdays, meetups, and relationship history get scattered across apps.",
+    solution: "Developed a MERN-stack social hub where users log friendships, track activities, set reminders, and maintain a private relationship history.",
+    results: ["Scalable MongoDB schema for social connections", "CRUD operations for friend & activity management", "Reminder system for social milestones", "Privacy-focused data architecture"],
+    myRole: ["Designed MongoDB schema for social data", "Built React frontend with component architecture", "Developed Node.js REST API endpoints", "Implemented notification & reminder logic", "Handled deployment and environment setup"],
+    challenges: ["Designing a scalable database schema for social connections.", "Implementing real-time notifications for social reminders.", "Ensuring high data privacy for user relationship logs."],
+    improvements: ["Integrating with major social media platforms for contact syncing.", "Adding AI-driven relationship insights and suggestions.", "Implementing a group management system for social circles."],
+    techStack: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS"]
+  },
+  {
+    id: "dragon-news",
+    title: "Dragon News",
+    description: "A modern and responsive news portal website for browsing, reading, and managing latest news articles.",
+    fullDescription: "Dragon News is a modern news portal web application designed to deliver the latest news in a clean, fast, and user-friendly interface.",
+    image: "/images/dragon-news.png",
+    category: "News Portal",
+    timeline: "4 Weeks",
+    tags: ["Next.js", "React", "Tailwind CSS", "Firebase", "REST API"],
+    liveUrl: "https://dragon-news-ms.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/Dragon-news",
+    problem: "Bangladesh lacks fast, category-organized news portals built with modern web tech. Many local news sites are slow, cluttered, and not optimized for mobile reading.",
+    solution: "Built a performant news portal with dynamic routing, category filtering, Firebase authentication, and a clean reading interface optimized for all devices.",
+    results: ["Dynamic article pages with category routing", "Firebase auth with protected user features", "Fast, mobile-optimized reading experience", "Clean UI matching modern news portal standards"],
+    myRole: ["Architected Next.js dynamic routing for articles", "Integrated Firebase Authentication", "Built category-based news filtering system", "Designed responsive article reading layout", "Optimized performance for fast page loads"],
+    challenges: ["Implementing dynamic routing for individual news pages.", "Managing category-based news filtering.", "Handling authentication and protected routes.", "Optimizing responsive UI for all screen sizes."],
+    improvements: ["Add comment system for news articles.", "Implement user profile and bookmarking feature.", "Add real-time news updates.", "Integrate admin dashboard for news management."],
+    techStack: ["Next.js", "React.js", "Tailwind CSS", "Firebase Authentication", "REST API"]
+  },
+  {
+    id: "bpl-dream-11",
+    title: "BPL Dream 11",
+    description: "A fantasy cricket team builder web application inspired by Dream11, focused on Bangladesh Premier League (BPL).",
+    fullDescription: "BPL Dream 11 is a fantasy cricket web application where users can create their own virtual cricket team using players from the Bangladesh Premier League (BPL).",
+    image: "/images/bpl-dream-11.png",
+    category: "Fantasy Sports App",
+    timeline: "3 Weeks",
+    tags: ["React", "JavaScript", "Tailwind CSS", "State Management", "API Integration"],
+    liveUrl: "https://bpl-dream-11-webp.netlify.app",
+    githubUrl: "https://github.com/msmahfuz3140/BPL-Dream-11",
+    problem: "Cricket fans want to build fantasy BPL teams but lack a dedicated, interactive platform with credit-based player selection logic.",
+    solution: "Created an interactive fantasy team builder with credit limits, role-based player selection, duplicate prevention, and real-time team state updates using React Context API.",
+    results: ["Credit-based player selection with validation", "Real-time team updates via React state", "Role-based team composition (WK, BAT, AR, BOWL)", "Interactive, responsive fantasy sports UI"],
+    myRole: ["Designed player selection logic & credit system", "Managed complex state with Context API", "Built interactive team builder UI", "Integrated player data via REST API", "Implemented duplicate selection prevention"],
+    challenges: ["Implementing player selection logic with credit limitations.", "Managing dynamic team updates using React state.", "Preventing duplicate player selection.", "Designing an interactive and responsive fantasy UI."],
+    improvements: ["Add user authentication system.", "Introduce leaderboard and scoring system.", "Enable team saving and editing feature.", "Add real-time match score integration."],
+    techStack: ["React.js", "JavaScript (ES6)", "Tailwind CSS", "Context API", "REST API"]
+  }
+];
+
+async function resetAndSeed() {
+  const client = new MongoClient(MONGODB_URI);
+  
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB");
+    
+    const db = client.db("portfolio");
+    const collection = db.collection("projects");
+    
+    // Delete all projects
+    const deleteResult = await collection.deleteMany({});
+    console.log(`Deleted ${deleteResult.deletedCount} projects`);
+    
+    // Insert all projects
+    const insertResult = await collection.insertMany(projects);
+    console.log(`Inserted ${insertResult.insertedCount} projects`);
+    
+    console.log("MongoDB reset and seeded successfully!");
+  } catch (error) {
+    console.error("Error:", error);
+    process.exit(1);
+  } finally {
+    await client.close();
+  }
+}
+
+resetAndSeed();

@@ -20,6 +20,101 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "coaching-center",
+    title: "Coaching Center",
+    description:
+      "A comprehensive coaching center management system - My first client project featuring modern full-stack architecture with role-based authentication and course management.",
+    fullDescription:
+      "Coaching Center is a full-featured web application built for managing coaching centers and educational institutions. This was my first paid client project, showcasing professional full-stack development. The system includes student management, course enrollment, attendance tracking, and an admin dashboard with secure authentication and role-based access control.",
+    image: "/images/coaching-center.jpg",
+    category: "Client Project - Education Management",
+    timeline: "10 Weeks",
+    tags: ["Next.js", "React", "Tailwind CSS", "Node.js", "Express.js", "Prisma", "Better Auth"],
+    liveUrl: "https://coching-center-frontend.vercel.app",
+    githubUrl: "private",
+    problem:
+      "The client needed a modern digital solution to manage their coaching center operations, including student enrollment, course management, and administrative tasks. Existing solutions were either too expensive or lacked modern features.",
+    solution:
+      "Developed a custom full-stack web application with Next.js frontend featuring modern UI/UX, Node.js/Express backend with Prisma ORM, Better Auth for secure authentication, and role-based access control for admins, teachers, and students.",
+    results: [
+      "Successfully delivered first paid client project with full satisfaction",
+      "Complete full-stack architecture with secure authentication",
+      "Role-based access control for different user types",
+      "Modern, responsive UI with excellent user experience",
+      "Live deployment on Vercel with production-ready code",
+    ],
+    myRole: [
+      "Led full-stack development as primary developer",
+      "Designed and implemented database schema with Prisma",
+      "Built responsive Next.js frontend with Tailwind CSS",
+      "Developed Node.js/Express REST API backend",
+      "Implemented Better Auth with role-based access control",
+      "Deployed and configured production environment on Vercel",
+    ],
+    challenges: [
+      "Understanding and implementing client requirements accurately",
+      "Managing full-stack development lifecycle independently",
+      "Implementing secure authentication with Better Auth",
+      "Designing efficient Prisma schema for complex relationships",
+      "Building responsive UI that works across all devices",
+      "Meeting project deadlines while maintaining code quality",
+    ],
+    improvements: [
+      "Add online payment integration for course fees",
+      "Implement real-time notifications for assignments and announcements",
+      "Add video conferencing for online classes",
+      "Introduce progress tracking and analytics dashboard",
+      "Add mobile app with React Native",
+    ],
+    techStack: ["Next.js", "React.js", "Tailwind CSS", "Node.js", "Express.js", "Prisma", "Better Auth", "REST API"],
+  },
+  {
+    id: "blood-donation",
+    title: "Blood Donation",
+    description:
+      "A web application for connecting blood donors with recipients in need.",
+    fullDescription:
+      "Blood Donation is a web application designed to facilitate the connection between blood donors and recipients in need. The platform allows users to register as donors or seek blood donations, providing a seamless way to manage and locate blood donation opportunities. The project demonstrates state management, component-based architecture, and interactive user experience similar to real-world healthcare platforms.",
+    image: "/images/blood-donation.png",
+    category: "Healthcare Platform",
+    timeline: "4 Weeks",
+    tags: ["React", "Next.js", "JavaScript", "Tailwind CSS", "State Management", "API Integration"],
+    liveUrl: "https://blood-donation-mpi.vercel.app",
+    githubUrl: "https://github.com/msmahfuz3140/blood-donation-practice-project",
+    problem:
+      "Many people struggle to find blood donors during emergencies. There's a need for a centralized platform that connects blood donors with recipients efficiently and quickly.",
+    solution:
+      "Built a web application that connects blood donors with recipients, featuring donor registration, blood request management, and search functionality using React state management and modern UI components.",
+    results: [
+      "Functional donor-recipient matching system",
+      "User registration and profile management",
+      "Blood request creation and tracking",
+      "Responsive design for easy access on any device",
+      "Live deployment for real-world usage",
+    ],
+    myRole: [
+      "Designed and developed full-stack application",
+      "Implemented state management for donor/recipient data",
+      "Built responsive UI with Tailwind CSS",
+      "Integrated REST API for data management",
+      "Deployed and configured production environment",
+    ],
+    challenges: [
+      "Implementing efficient donor-recipient matching logic",
+      "Managing complex state for blood requests and donor data",
+      "Designing intuitive UI for emergency situations",
+      "Ensuring fast performance for critical search operations",
+    ],
+    improvements: [
+      "Add user authentication and role-based access",
+      "Implement real-time notifications for blood requests",
+      "Add location-based donor search with maps",
+      "Integrate SMS/email alerts for urgent requests",
+      "Add donor eligibility verification system",
+    ],
+    techStack: ["React.js", "Next.js", "JavaScript (ES6)", "Tailwind CSS", "Context API", "REST API"],
+  },
+  {
     id: "tutor-finder",
     title: "Tutor Finder",
     description:
@@ -237,48 +332,5 @@ export const projects: Project[] = [
       "Add real-time match score integration.",
     ],
     techStack: ["React.js", "JavaScript (ES6)", "Tailwind CSS", "Context API", "REST API"],
-  },
-  {
-    id: "blood-donation",
-    title: "Blood Donation",
-    description: "A web application for connecting blood donors with recipients in need.",
-    fullDescription:
-      "Blood Donation is a web application designed to facilitate the connection between blood donors and recipients in need. Users can register as donors or seek blood donations with location and blood group filtering.",
-    image: "/images/blood-donation.png",
-    category: "Healthcare Platform",
-    timeline: "4 Weeks",
-    tags: ["React", "Next.js", "JavaScript", "Tailwind CSS", "State Management", "API Integration"],
-    liveUrl: "https://blood-donation-mpi.vercel.app",
-    githubUrl: "https://github.com/msmahfuz3140/blood-donation-practice-project",
-    problem:
-      "Finding compatible blood donors during emergencies is difficult — donors and recipients have no quick digital way to connect by blood group, location, and availability.",
-    solution:
-      "Built a donor-recipient matching platform with registration forms, blood group filtering, location-based search, and a clean dashboard for managing donation requests.",
-    results: [
-      "Donor & recipient registration system",
-      "Blood group and location-based filtering",
-      "Responsive healthcare-focused UI",
-      "Deployed live for real-world usability",
-    ],
-    myRole: [
-      "Designed donor/recipient data models",
-      "Built registration and search functionality",
-      "Implemented filtering by blood group & location",
-      "Created responsive UI with Next.js & React",
-      "Handled API integration and deployment",
-    ],
-    challenges: [
-      "Designing intuitive donor registration flow.",
-      "Implementing blood group and location filtering.",
-      "Managing form validation for medical data.",
-      "Building a trustworthy, accessible healthcare UI.",
-    ],
-    improvements: [
-      "Add real-time donor availability status.",
-      "Implement SMS/email notification for matches.",
-      "Add hospital integration for verified requests.",
-      "Introduce donor verification system.",
-    ],
-    techStack: ["React.js", "Next.js", "JavaScript (ES6)", "Tailwind CSS", "Context API", "REST API"],
   },
 ];

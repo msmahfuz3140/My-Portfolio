@@ -9,7 +9,7 @@ const COLLECTION = "projects";
 
 let mongoClient: MongoClient | null = null;
 
-function useMongo() {
+function isMongoEnabled() {
   return !!process.env.MONGODB_URI;
 }
 
@@ -59,11 +59,18 @@ async function getProjectsFromMongo(): Promise<Project[]> {
     await collection.insertMany(seedProjects);
     return seedProjects;
   }
-  return list;
+  // Convert MongoDB documents to plain objects
+  return list.map((doc: any) => {
+    const { _id, ...rest } = doc;
+    return {
+      ...rest,
+      id: rest.id || _id.toString(),
+    } as Project;
+  });
 }
 
 export async function getProjects(): Promise<Project[]> {
-  if (useMongo()) {
+  if (isMongoEnabled()) {
     try {
       return await getProjectsFromMongo();
     } catch (err) {
@@ -75,12 +82,19 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 export async function saveProject(project: Omit<Project, "id">): Promise<Project> {
+  // Auto-fix image path
+  let image = project.image.trim();
+  if (!image.startsWith("/") && !image.startsWith("http://") && !image.startsWith("https://")) {
+    image = "/" + image;
+  }
+
   const newProject: Project = {
     ...project,
+    image,
     id: project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || crypto.randomUUID(),
   };
 
-  if (useMongo()) {
+  if (isMongoEnabled()) {
     const collection = await getMongoCollection();
     await collection.insertOne(newProject);
     return newProject;
@@ -93,7 +107,7 @@ export async function saveProject(project: Omit<Project, "id">): Promise<Project
 }
 
 export async function updateProject(id: string, updatedData: Partial<Project>): Promise<Project | null> {
-  if (useMongo()) {
+  if (isMongoEnabled()) {
     const collection = await getMongoCollection();
     const result = await collection.findOneAndUpdate(
       { id },
@@ -113,7 +127,7 @@ export async function updateProject(id: string, updatedData: Partial<Project>): 
 }
 
 export async function deleteProject(id: string): Promise<boolean> {
-  if (useMongo()) {
+  if (isMongoEnabled()) {
     const collection = await getMongoCollection();
     const result = await collection.deleteOne({ id });
     return result.deletedCount === 1;
